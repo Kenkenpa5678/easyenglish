@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>やさしい動詞で伝えよう！ — 英語句動詞600 クイズ＆音読復習</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    .blank-pill {
+      display: inline-block;
+      min-width: 5.5rem;
+      border-bottom: 2.5px solid #4f46e5;
+      padding: 0 0.45rem;
+      margin: 0 0.15rem;
+      text-align: center;
+      font-weight: 700;
+      color: #4f46e5;
+      transition: all 0.15s ease;
+    }
+    .blank-pill.correct {
+      border-color: #16a34a;
+      color: #15803d;
+      background: #dcfce7;
+      border-radius: 0.375rem;
+    }
+    .blank-pill.wrong {
+      border-color: #dc2626;
+      color: #b91c1c;
+      background: #fee2e2;
+      border-radius: 0.375rem;
+    }
+    .phrase-highlight {
+      background: linear-gradient(120deg, #e0e7ff 0%, #ede9fe 100%);
+      color: #3730a3;
+      padding: 0.1rem 0.4rem;
+      border-radius: 0.375rem;
+      font-weight: 700;
+      border-bottom: 2px solid #6366f1;
+    }
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.35); }
+      70% { box-shadow: 0 0 0 10px rgba(79, 70, 229, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+    }
+    .speaking-active {
+      animation: pulse-ring 1.4s infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between gap-3">
+      <button id="btn-home" class="flex items-center gap-2 text-left group">
+        <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center shadow-sm group-hover:bg-indigo-700 transition">600</span>
+        <div>
+          <h1 class="text-sm sm:text-base font-bold text-slate-900 leading-tight">やさしい動詞で伝えよう！</h1>
+          <p class="text-[11px] text-slate-500 hidden sm:block leading-none">全600問 単語別・総合ランダム＆音読復習</p>
+        </div>
+      </button>
+
+      <nav class="flex items-center gap-1.5 sm:gap-2">
+        <button id="nav-sets" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition">セット一覧</button>
+        <button id="nav-review" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-1.5">
+          <span>音読復習</span>
+          <span id="nav-wrong-badge" class="px-1.5 py-0.5 text-[11px] rounded-full bg-rose-100 text-rose-700 font-bold">0</span>
+        </button>
+        <button id="btn-settings" class="p-2 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition" title="音声・データ設定" aria-label="設定">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="app-main" class="flex-1 max-w-5xl w-full mx-auto px-4 py-6"></main>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 px-4 py-2.5 rounded-xl bg-slate-900 text-white text-sm font-medium shadow-lg opacity-0 pointer-events-none transition-opacity duration-200"></div>
+
+  <!-- Settings / Backup Modal -->
+  <div id="settings-modal" class="fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-bold text-slate-900">音声・学習データ設定</h2>
+        <button id="close-settings" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100">✕</button>
+      </div>
+
+      <div class="space-y-4 text-sm">
+        <div>
+          <label for="voice-select" class="block font-semibold text-slate-700 mb-1">英語音声（Web Speech API）</label>
+          <select id="voice-select" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"></select>
+          <p class="text-xs text-slate-500 mt-1">※お使いのブラウザ・OSに搭載された英語音声を使用します。</p>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">デフォルト再生速度</label>
+          <div id="speed-options" class="grid grid-cols-4 gap-2"></div>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">音読モードのポーズ間隔（リピート間）</label>
+          <div id="gap-options" class="grid grid-cols-3 gap-2"></div>
+        </div>
+
+        <hr class="border-slate-200" />
+
+        <div class="space-y-2">
+          <p class="font-semibold text-slate-700">学習データのバックアップ（GitHub Pages間での移行用）</p>
+          <div class="flex gap-2">
+            <button id="btn-export" class="flex-1 px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs transition">JSONを書き出す</button>
+            <label class="flex-1 px-3 py-2 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold text-xs text-center cursor-pointer transition">
+              JSONを読み込む
+              <input id="input-import" type="file" accept="application/json,.json" class="hidden" />
+            </label>
+          </div>
+          <button id="btn-reset-confirm" class="w-full px-3 py-2 rounded-lg border border-rose-200 text-rose-600 hover:bg-rose-50 font-semibold text-xs transition">学習記録をすべてリセット</button>
+          <div id="reset-confirm-box" class="hidden p-3 rounded-lg bg-rose-50 border border-rose-200 text-xs space-y-2">
+            <p class="text-rose-800 font-semibold">本当にすべての学習記録と復習リストを削除しますか？</p>
+            <div class="flex gap-2">
+              <button id="btn-reset-exec" class="px-3 py-1.5 rounded bg-rose-600 text-white font-semibold hover:bg-rose-700">削除する</button>
+              <button id="btn-reset-cancel" class="px-3 py-1.5 rounded bg-white border border-slate-300 text-slate-700 font-semibold">キャンセル</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Embedded 600 Phrasal Verbs Dataset (60 sets x 10 questions)
+    const PHRASAL_SETS = [{"page": 1, "title": "break 1", "choices": ["away", "down", "even", "free from", "in", "into", "out", "the silence", "through", "up"], "questions": [{"n": 1, "jp": "あなたの励ましの言葉で、彼女は自分の殻を破ることができました。", "en": "Your encouraging words helped her break ____ of her shell.", "ans": "out"}, {"n": 2, "jp": "泥棒がわが家に侵入して、私の貴重品をすべて盗んでいってしまいました。", "en": "A thief broke ____ my house and took all my valuables.", "ans": "into"}, {"n": 3, "jp": "私は積年の問題をついに解決しました。", "en": "I have broken ____ my deep-seated problem.", "ans": "through"}, {"n": 4, "jp": "彼女は従来のスタイルから脱却して、自分自身のファッションでいくことにしました。", "en": "She broke ____ from the traditional style to start her own fashion.", "ans": "away"}, {"n": 5, "jp": "この経済危機の中で、私の事業は昨年、収支がかろうじてとんとんに収まりました。", "en": "In this economic crisis, my business just managed to break ____ last year.", "ans": "even"}, {"n": 6, "jp": "誰かがその新入社員に手ほどきをしなければなりません。", "en": "Someone will have to break ____ the new recruit.", "ans": "in"}, {"n": 7, "jp": "イタリアでパスポートをなくしたとき、彼女は取り乱して泣いてしまいました。", "en": "When she lost her passport in Italy, she broke ____ and cried.", "ans": "down"}, {"n": 8, "jp": "あそこでけんかをしている人たちの仲裁に入ってくれませんか？", "en": "Can you break ____ the fight over there?", "ans": "up"}, {"n": 9, "jp": "その会社は、すべての借金から抜け出しました。", "en": "The company broke ____ all the debts.", "ans": "free from"}, {"n": 10, "jp": "お菓子をあげたら、少年は沈黙を破って真実を語りました。", "en": "When I offered some candy, the boy broke ____ and revealed the truth.", "ans": "the silence"}]}, {"page": 2, "title": "break 2", "choices": ["down", "fall", "ground for", "in on [upon]", "it up", "new ground", "off", "out", "out in a cold sweat", "up"], "questions": [{"n": 1, "jp": "6月にわが社は、新しいオフィスビル建設に着手します。", "en": "Our company will break ____ the new office building in June.", "ans": "ground for"}, {"n": 2, "jp": "観客の数を見て、私は怖くなりました。", "en": "I broke ____ having seen all the people in the audience.", "ans": "out in a cold sweat"}, {"n": 3, "jp": "緊急のことなら、ちょっと割って入って知らせてください。", "en": "If it is something urgent, just break ____ me.", "ans": "in on [upon]"}, {"n": 4, "jp": "もう真夜中過ぎだったので、パーティーを解散しました。", "en": "It was already past midnight so we broke ____ the party.", "ans": "up"}, {"n": 5, "jp": "氷の上で滑ったのですが、リュックサックが私を衝撃から守ってくれました。", "en": "I slipped on ice but my backpack broke my ____.", "ans": "fall"}, {"n": 6, "jp": "道化師が転ぶたびに、子どもたちはどっと笑い出しました。", "en": "The children broke ____ in laughter every time the clown fell down.", "ans": "out"}, {"n": 7, "jp": "彼らは、スパイに彼の家族の写真を見せて、自白させました。", "en": "They broke the agent ____ by showing pictures of his family.", "ans": "down"}, {"n": 8, "jp": "この部分がランプから外れ落ちました。", "en": "This part broke ____ from the lamp.", "ans": "off"}, {"n": 9, "jp": "病院の医師たちは、がん研究で新たな発見をしました。", "en": "Doctors at the hospital have broken ____ in cancer research.", "ans": "new ground"}, {"n": 10, "jp": "さあ、君たち2人とも、もう十分です。（けんかを）やめなさい。", "en": "All right, you two. That's enough. Break ____.", "ans": "it up"}]}, {"page": 3, "title": "bring 1", "choices": ["back", "forth", "forward", "into service", "out", "out in droves", "to a standstill", "to my attention", "up", "up to speed"], "questions": [{"n": 1, "jp": "しばらく留守にしていたので、必要な情報を教えてもらえませんか？", "en": "I've been away so could you bring me ____?", "ans": "up to speed"}, {"n": 2, "jp": "古い写真アルバムを見ていたら、すてきな思い出がよみがえりました。", "en": "Looking through old photo albums brought ____ good memories.", "ans": "back"}, {"n": 3, "jp": "私は、新潟の小さな田舎町で育ちました。", "en": "I was brought ____ in a small countryside in Niigata.", "ans": "up"}, {"n": 4, "jp": "首相のその発言は、若干抗議を引き起こしました。", "en": "The Prime Minister's remark has brought ____ some protests.", "ans": "forth"}, {"n": 5, "jp": "この件を私に知らせてくれてありがとう。", "en": "Thank you for bringing this ____.", "ans": "to my attention"}, {"n": 6, "jp": "そのバンドは、盛大な拍手でステージに迎えられました。", "en": "The band was brought ____ on stage by a big applause.", "ans": "out"}, {"n": 7, "jp": "お子さんを前に出してください。診察しますから。", "en": "Bring your child ____ so I can see her.", "ans": "forward"}, {"n": 8, "jp": "新しく開店したそのレストランは、大勢の客を呼び寄せました。", "en": "The newly opened restaurant brought people ____.", "ans": "out in droves"}, {"n": 9, "jp": "費用対効果の優れた新しい機械を使い始めます。", "en": "The new cost effective machinery will be brought ____.", "ans": "into service"}, {"n": 10, "jp": "株式恐慌は仕事を停止させました。", "en": "The stock exchange crisis brought the work ____.", "ans": "to a standstill"}]}, {"page": 4, "title": "bring 2", "choices": ["along", "(a)round", "back to life", "in", "into contact with", "into prominence", "on board", "out the best in", "the house down", "to light"], "questions": [{"n": 1, "jp": "彼は、人工蘇生によって生き返りました。", "en": "With artificial resuscitation, he was brought ____.", "ans": "back to life"}, {"n": 2, "jp": "今の仕事は、私のいちばんよいところを引き出してくれます。", "en": "My current job brings ____ me.", "ans": "out the best in"}, {"n": 3, "jp": "観光事業は、数十億ドルの収益をもたらします。", "en": "Tourism brings ____ billions of dollars in revenue.", "ans": "in"}, {"n": 4, "jp": "新商品を発表したら、わが社は有名になりました。", "en": "Our company was brought ____ when we announced our new product line.", "ans": "into prominence"}, {"n": 5, "jp": "その記事は、彼女の興味深い過去を明らかにしました。", "en": "The article brought ____ an interesting story of her background.", "ans": "to light"}, {"n": 6, "jp": "彼女のすばらしい演奏は、聴衆の大喝采を博しました。", "en": "Her great performance brought ____.", "ans": "the house down"}, {"n": 7, "jp": "新年のパーティーには、夫婦同伴でおいでください。", "en": "Bring your spouses ____ to the New Year's party.", "ans": "along"}, {"n": 8, "jp": "伊勢さんが入社するとすぐに、業績が好転し始めました。", "en": "As soon as we brought Mr. Ise ____, things began to pick up.", "ans": "on board"}, {"n": 9, "jp": "彼女は聞く耳をもたない性格なので、説得することはできませんでした。", "en": "She was so headstrong that I couldn't bring her ____.", "ans": "(a)round"}, {"n": 10, "jp": "トムをビルと会わせると、トラブルが起きる予感がします。", "en": "I foresee trouble if you bring Tom ____ Bill.", "ans": "into contact with"}]}, {"page": 5, "title": "come 1", "choices": ["across", "apart", "full circle", "into being", "into play", "off it", "over", "short of", "up", "up with"], "questions": [{"n": 1, "jp": "新しい宣伝企画案を急いで考え出さなければなりません。", "en": "We've got to come ____ a new advertising plan fast.", "ans": "up with"}, {"n": 2, "jp": "きのうの夜、クラブで古い友人にばったり会いました。", "en": "I came ____ my old friend last night at the club.", "ans": "across"}, {"n": 3, "jp": "私の車はすごく古いので、あのでこぼこ道では壊れてしまうのではないかと心配です。", "en": "My car is so old that I am afraid it would come ____ on that rough road.", "ans": "apart"}, {"n": 4, "jp": "リサイクル品をどうすべきかという問題は、一度も話題に上りませんでした。", "en": "The issue of what to do with recyclables never came ____.", "ans": "up"}, {"n": 5, "jp": "威張るのはやめなさい！ 君は去年入社したばかりじゃないか！", "en": "Come ____! You just started working last year!", "ans": "off it"}, {"n": 6, "jp": "この社内規則は、理由があって設けられたのです。", "en": "These company rules came ____ for a reason.", "ans": "into being"}, {"n": 7, "jp": "年間目標に達するには、10点足りませんでした。", "en": "We came ____ our yearly goal by 10 points.", "ans": "short of"}, {"n": 8, "jp": "今はやっているファッションは、また巡ってきたものです。", "en": "The fashion we see now has come ____.", "ans": "full circle"}, {"n": 9, "jp": "実社会では、すべての努力と準備が生きてきます。", "en": "All the efforts and preparations come ____ in the real world.", "ans": "into play"}, {"n": 10, "jp": "お店の人が私たちのテーブルにやってきて、注文を取りました。", "en": "The waitress came ____ to our table to take our order.", "ans": "over"}]}, {"page": 6, "title": "come 2", "choices": ["(a)round", "back to", "down, from", "forward", "home to roost", "out of the blue", "out with", "through", "to pass", "up for air"], "questions": [{"n": 1, "jp": "ジェインは頼りになるよ。彼女はいつも君の力になってくれるから。", "en": "You can depend on Jane. She will always come ____ for you.", "ans": "through"}, {"n": 2, "jp": "何か気に入らないことがあったら、おっしゃってください。", "en": "If anything bothers you, come ____ it.", "ans": "out with"}, {"n": 3, "jp": "私の銀食器は、すべて祖母から継いだものなのです。", "en": "All my silverware came ____ to me ____ my grandmother.", "ans": "down, from"}, {"n": 4, "jp": "あの行方不明になっていたファイルが、ある朝、突然出てきました。", "en": "Those missing files, one morning, came ____.", "ans": "out of the blue"}, {"n": 5, "jp": "我々の上司のスタッフに対する高慢な態度は、いつか彼自身に跳ね返ってくるでしょう。", "en": "Our boss's disdain toward his staff will come ____.", "ans": "home to roost"}, {"n": 6, "jp": "一段落したら、一息入れてください。", "en": "When you are settled, come ____.", "ans": "up for air"}, {"n": 7, "jp": "彼女は長い間躊躇していましたが、私たちは最後には納得してもらいました。", "en": "She hesitated for a long time but eventually we got her to come ____.", "ans": "(a)round"}, {"n": 8, "jp": "あの古い村を訪れたら、あらゆることが思い出されました。", "en": "Everything came ____ me when I visited that old village.", "ans": "back to"}, {"n": 9, "jp": "彼は罪悪感にさいなまれて、出頭する決心をしました。", "en": "He was guilt-ridden so he decided to come ____.", "ans": "forward"}, {"n": 10, "jp": "このまま待ち続ければ、もうすぐいいことがありますよ。", "en": "If you keep waiting, good things will soon come ____.", "ans": "to pass"}]}, {"page": 7, "title": "give 1", "choices": ["away", "in", "me free rein", "my best", "my right arm for", "notice", "off", "out", "some thought to", "to"], "questions": [{"n": 1, "jp": "そのことについてよく考えてみなさい。重要なことだから。", "en": "Give ____ the matter. It's very important.", "ans": "some thought to"}, {"n": 2, "jp": "彼は反論し続けたけれども、最後には私の要求をのみました。", "en": "He argued and argued but he finally gave ____ to my demand.", "ans": "in"}, {"n": 3, "jp": "裏庭のバラの花が、今もかぐわしい香りを漂わせています。", "en": "Roses in my backyard are still giving ____ a fragrant scent.", "ans": "off"}, {"n": 4, "jp": "マラソンを走ったあと、疲労で足が動かなくなりました。", "en": "After running the marathon, my legs gave ____ from exhaustion.", "ans": "out"}, {"n": 5, "jp": "アイディアは私が提案したので、上司は私にそのプロジェクトを任せてくれました。", "en": "Because I brought up the idea, my boss gave ____ in the project.", "ans": "me free rein"}, {"n": 6, "jp": "熱帯地方での1週間の休暇をくれるなら、どんなことでもするよ。", "en": "I'll give ____ a week in the tropics.", "ans": "my right arm for"}, {"n": 7, "jp": "襟についている口紅で、彼の秘密がばれてしまいました。", "en": "The lipstick on his collar gave himself ____.", "ans": "away"}, {"n": 8, "jp": "さようなら、リズ、お母様によろしくお伝えください。", "en": "Bye, Liz, give ____ to your mother.", "ans": "my best"}, {"n": 9, "jp": "物事がうまくいかなくなると、彼は過食に走ります。", "en": "He is given ____ binge-eating when things go wrong.", "ans": "to"}, {"n": 10, "jp": "きょう、リサは辞表を提出しました。ほかの会社から仕事のオファーがあったのです。", "en": "Lisa gave ____ today. She got a job offer from another company.", "ans": "notice"}]}, {"page": 8, "title": "give 2", "choices": ["a lift", "back", "birth", "forth", "in", "me a break", "the game [show] away", "up for lost", "up the fight", "way"], "questions": [{"n": 1, "jp": "ネコはいなくなってしまったんだから、諦めなくちゃ。もう帰ってこないよ。", "en": "Give the cat ____. He won't come back.", "ans": "up for lost"}, {"n": 2, "jp": "車は、登校中の子どもたちを優先させました。", "en": "The cars gave ____ to the children on their way to school.", "ans": "way"}, {"n": 3, "jp": "試合終了2分前でも、そのチームは諦めずに戦いました。", "en": "With only two minutes left of the game, the team didn't give ____.", "ans": "up the fight"}, {"n": 4, "jp": "楽しい会話ができ、彼女の優しい言葉が僕をとても元気づけてくれました。", "en": "It was a good conversation and her kind words really gave me ____.", "ans": "a lift"}, {"n": 5, "jp": "彼はヒントをたくさん出しすぎて、手の内を見せてしまいました。", "en": "He gave ____ by giving too many clues.", "ans": "the game [show] away"}, {"n": 6, "jp": "扉を蹴ったら、壊れてしまいました。", "en": "When I kicked the door, it gave ____.", "ans": "in"}, {"n": 7, "jp": "ゴリラが市内を逃走中だって？ 冗談でしょう！", "en": "Are you saying that a gorilla is loose in a city? Give ____!", "ans": "me a break"}, {"n": 8, "jp": "その本は借りていたのだから、きちんと返しなさい。", "en": "The book was on loan so you'd better give it ____ promptly.", "ans": "back"}, {"n": 9, "jp": "私の友達は、1週間以内に出産するでしょう。", "en": "My friend will give ____ in a week.", "ans": "birth"}, {"n": 10, "jp": "ステージに上がったアイドルを見たとたん、ファンは興奮の叫び声を発しました。", "en": "The fans gave ____ with cries of excitement when they saw their idol come up on stage.", "ans": "forth"}]}, {"page": 9, "title": "go 1", "choices": ["against", "along with", "between", "beyond [over]", "easy on", "for", "forward [ahead] with", "on", "out to", "south"], "questions": [{"n": 1, "jp": "私たちが立てたそのプランを進めてはどうでしょうか？", "en": "Why don't we go ____ the plan we made?", "ans": "forward [ahead] with"}, {"n": 2, "jp": "私の意見に反対しないでください。あなたと議論したくないのです。", "en": "Please don't go ____ me. I don't want to argue with you.", "ans": "against"}, {"n": 3, "jp": "彼は、必ず次のオリンピックで金メダルを狙うよ。", "en": "He will definitely go ____ a gold medal in the next Olympics.", "ans": "for"}, {"n": 4, "jp": "あそこで何が起きているのですか？", "en": "What's going ____ over there?", "ans": "on"}, {"n": 5, "jp": "彼女にはお手柔らかにね。私の親友の一人なんだから。", "en": "Go ____ her. She is one of my best friends.", "ans": "easy on"}, {"n": 6, "jp": "彼の悪ふざけについていったけれど、ふざけすぎて手に負えなくなりました。", "en": "I went ____ his joke but it got out of hand.", "ans": "along with"}, {"n": 7, "jp": "このテーブルは、ソファと壁の間に置くべきです。", "en": "This table should go ____ the sofa and the wall.", "ans": "between"}, {"n": 8, "jp": "制限速度を超えていたので、交通違反の切符を切られたのですか？", "en": "Did you get a ticket because you went ____ the speed limit?", "ans": "beyond [over]"}, {"n": 9, "jp": "その衝撃的なニュースのあとで、株式市場が暴落しました。", "en": "The stock market went ____ after the shocking news.", "ans": "south"}, {"n": 10, "jp": "本当にお気の毒です。あなたのお母様はすばらしい方でした。", "en": "My heart goes ____ you. Your mother was a wonderful person.", "ans": "out to"}]}, {"page": 10, "title": "go 2", "choices": ["all out", "(a)round [about]", "by the book", "off", "out", "over", "overboard", "through", "up", "up against"], "questions": [{"n": 1, "jp": "フレッドの最後の日だったので、私たちは総力を挙げて、彼の最も思い出に残る日にしました。", "en": "Since it was Fred's last day, we went ____ and made it the most memorable day for him.", "ans": "all out"}, {"n": 2, "jp": "朝子さんは常に、誰にでも援助の手を差し伸べています。", "en": "Asako always goes ____ helping whomever she can.", "ans": "(a)round [about]"}, {"n": 3, "jp": "ガソリンの価格は一時高騰しましたが、若干下がってきました。", "en": "Gasoline price had gone way ____, but it's come down a bit.", "ans": "up"}, {"n": 4, "jp": "ティムとジョンはどこに出かけるのですか？", "en": "Where are Tim and John going ____ to?", "ans": "off"}, {"n": 5, "jp": "これが、あなたがどうしても解決しなければならない問題です。", "en": "This is what you have to go ____ no matter what.", "ans": "through"}, {"n": 6, "jp": "あなたのかかりつけの医師に、もう一度検査をしてもらってはどうですか？", "en": "Why don't you ask your doctor to go ____ one more test?", "ans": "over"}, {"n": 7, "jp": "明かりが消えた。ヒューズボックスをチェックしてくれる？", "en": "The lights went ____. Can you check the fuse box?", "ans": "out"}, {"n": 8, "jp": "セールストークは、やりすぎないでください。", "en": "Don't go ____ with your sales talk.", "ans": "overboard"}, {"n": 9, "jp": "上司はいつも型どおりにやる人で、決して新しいアイディアを進めようとはしません。", "en": "Our boss always goes ____ and never initiates new ideas.", "ans": "by the book"}, {"n": 10, "jp": "彼らは、手ごわい相手に挑みました。", "en": "They went ____ a strong opponent.", "ans": "up against"}]}, {"page": 11, "title": "hold 1", "choices": ["back", "in", "it against me", "my breath", "off", "on", "out on", "over", "to", "up"], "questions": [{"n": 1, "jp": "その仕事を受けることをなぜ躊躇しているのですか？ いい仕事だと思ったのですが。", "en": "Why are you holding ____ on this job? I thought it was a good one.", "ans": "off"}, {"n": 2, "jp": "その怒りを抑え込んでいたら、神経がまいってしまいますよ。", "en": "You'll have a nervous breakdown if you hold ____ all that anger.", "ans": "in"}, {"n": 3, "jp": "あなた、ダイエットしているんじゃない？ そのケーキは控えたら。", "en": "Aren't you on a diet? Hold ____ on that cake.", "ans": "back"}, {"n": 4, "jp": "プロジェクトを完成させると言ったからには、その約束を守ってもらいますよ。", "en": "You said you'll finish the project and I'm holding you ____ your promise.", "ans": "to"}, {"n": 5, "jp": "この列は全然動かないな。なぜ前に進めないんだろう？", "en": "This line isn't moving. What's holding us ____?", "ans": "up"}, {"n": 6, "jp": "ちょっと待って。コンピューターを立ち上げるのに時間がかかるんだ。", "en": "Hold ____. It'll take a while to boot up my computer.", "ans": "on"}, {"n": 7, "jp": "電話を待っているんだけど、期待するつもりはありません。", "en": "I'm waiting for the call but I'm not going to hold ____.", "ans": "my breath"}, {"n": 8, "jp": "隠しごとはしないで。そのグッドニュースを打ち明けてよ。", "en": "Don't hold ____ me. Give me the good news.", "ans": "out on"}, {"n": 9, "jp": "ジャッキー、私の言ったことは間違っていたけれど、私を悪く思わないでね。", "en": "Jackie, I was wrong to say that but please don't hold ____.", "ans": "it against me"}, {"n": 10, "jp": "新事業の開始をしばらく延期することに決めました。", "en": "We decided to hold ____ the new business for awhile.", "ans": "over"}]}, {"page": 12, "title": "hold 2", "choices": ["by", "down", "forth", "good", "me out", "out", "still", "the line", "together", "up"], "questions": [{"n": 1, "jp": "最初は数々の問題が生じたにもかかわらず、この試作品はよくもちこたえています。", "en": "In spite of the many problems we had initially, this prototype is holding ____ well.", "ans": "up"}, {"n": 2, "jp": "1つの仕事を1年も続けられない君が、結婚？", "en": "Marriage? You can't even hold ____ a job for one year!", "ans": "down"}, {"n": 3, "jp": "彼の供述書は法廷で役に立つと思いますか？", "en": "Do you think his statement will hold ____ in court?", "ans": "good"}, {"n": 4, "jp": "彼は、自分の新しいアイディアについて1時間長々と話しました。", "en": "He held ____ for an hour about his new idea.", "ans": "forth"}, {"n": 5, "jp": "約束は絶対に守らなければならないよ。", "en": "You have to hold ____ your promise no matter what.", "ans": "by"}, {"n": 6, "jp": "私は肩をけがしたので、ゲームから外されました。", "en": "They held ____ of the game because I injured my shoulder.", "ans": "me out"}, {"n": 7, "jp": "家庭を守るために、2つの仕事をかけもちしていました。", "en": "I used to work at two jobs in order to hold my family ____.", "ans": "together"}, {"n": 8, "jp": "今、別の電話に出ているので、お待ちいただけますか？", "en": "I'm on another line. Can you hold ____?", "ans": "the line"}, {"n": 9, "jp": "そのレースでの勝利については、彼女はそれほど期待されていません。", "en": "She doesn't hold ____ much hope of winning the race.", "ans": "out"}, {"n": 10, "jp": "あんな意見を言われて、彼は黙っていると思いますか？", "en": "Do you think he will hold ____ after hearing that kind of comment?", "ans": "still"}]}, {"page": 13, "title": "leave 1", "choices": ["alone", "behind", "for", "it to", "off", "on", "out", "rolling in the aisles", "up [open]", "up in the air"], "questions": [{"n": 1, "jp": "ロンドン行きの最初の飛行機は何時発でしょうか？", "en": "What time does the first plane leave ____ London?", "ans": "for"}, {"n": 2, "jp": "エネルギーを節約するため、1日中電灯をつけっぱなしにするのはやめましょう。", "en": "Let's conserve energy and not leave the lights ____ all day.", "ans": "on"}, {"n": 3, "jp": "彼らは連絡すると言って私を待たせたまま、うやむやにしてしまいました。", "en": "They said they'll call and left me ____.", "ans": "up in the air"}, {"n": 4, "jp": "ジョーは気分が悪かったので、私たちは彼を残して出かけました。", "en": "Joe was sick so we have left him ____.", "ans": "behind"}, {"n": 5, "jp": "そのコメディアンの演技は、我々を大笑いさせました。", "en": "The comedian's performance left us ____.", "ans": "rolling in the aisles"}, {"n": 6, "jp": "その問題を考えるために、独りにしてほしいのです。", "en": "I need to be left ____ to think about that problem.", "ans": "alone"}, {"n": 7, "jp": "もし部屋が少し暑く感じられるなら、窓を開けておいてかまいません。", "en": "If the room feels a little warm, leave the window ____.", "ans": "up [open]"}, {"n": 8, "jp": "「これ、終わらせることができないよ」「心配しないで。私に任せて」", "en": "\"I can't finish this.\" \"Don't worry. Leave ____ me.\"", "ans": "it to"}, {"n": 9, "jp": "どこまでやっていたかしら？ あ、そうそう、35ページでした。", "en": "Where did we leave ____? Oh, yes, we were on page 35.", "ans": "off"}, {"n": 10, "jp": "この文に、大事な言葉を抜かしてしまいましたよ。", "en": "You left ____ an important word in this sentence.", "ans": "out"}]}, {"page": 14, "title": "leave 2", "choices": ["aside", "holding the bag [sack]", "in the back, mind", "in my hands", "no stone unturned", "taste in my mouth", "to chance", "to, devices", "with", "word with [for]"], "questions": [{"n": 1, "jp": "この問題は心の奥にとどめておいて、後日、対応しなさい。", "en": "Leave this problem ____ of your ____, and deal with it later.", "ans": "in the back, mind"}, {"n": 2, "jp": "あなたは会議室にいる、とボブに伝言を残しておきなさい。", "en": "Leave ____ Bob that you'll be in the conference room.", "ans": "word with [for]"}, {"n": 3, "jp": "彼の好きなようにさせたら、彼はそれに対処できるよ。", "en": "If we leave him ____ his own ____, he'll be able to handle it.", "ans": "to, devices"}, {"n": 4, "jp": "何か問題が起きることもありえるので、成り行きに任せないでください。", "en": "Don't leave things ____ because anything can go wrong.", "ans": "to chance"}, {"n": 5, "jp": "全部食べ切れなかったら、そこに置いておいてね。冷蔵庫に入れるから。", "en": "If you can't finish everything, leave it ____ and I'll keep it in the refrigerator.", "ans": "aside"}, {"n": 6, "jp": "その過失は彼女のせいではありませんでしたが、彼女は責任を取らされるはめになりました。", "en": "The error was not her fault but she was left ____.", "ans": "holding the bag [sack]"}, {"n": 7, "jp": "確固たる証拠をつかむまで、くまなく捜せ。", "en": "Leave ____ until we find firm evidence.", "ans": "no stone unturned"}, {"n": 8, "jp": "あなたがすべてを任せたのは、マイクだったの？", "en": "Was it Mike you left everything ____?", "ans": "with"}, {"n": 9, "jp": "私たちが会話をいきなり終わらせたとき、私には後味の悪さが残りました。", "en": "It left a bad ____ when we abruptly ended our talk.", "ans": "taste in my mouth"}, {"n": 10, "jp": "彼らは、そのプロジェクト全体を私に一任しました。", "en": "They left the entire project ____.", "ans": "in my hands"}]}, {"page": 15, "title": "make 1", "choices": ["a face", "a fool out of", "away with", "for", "fun of", "into", "it", "out", "the best of", "up"], "questions": [{"n": 1, "jp": "アンとはもう仲直りしましたか？", "en": "Have you made ____ with Anne yet?", "ans": "up"}, {"n": 2, "jp": "ジムは、私の新しいヘアスタイルをおかしいとからかっています。", "en": "Jim is making ____ my new hairdo.", "ans": "fun of"}, {"n": 3, "jp": "当分の間、このアパートで我慢しましょう。", "en": "Let's make ____ this apartment for a while.", "ans": "the best of"}, {"n": 4, "jp": "彼女が何を言っているのか、ほとんどわかりませんでした。あなたはわかりましたか？", "en": "I could barely make ____ what she was saying. Did you understand?", "ans": "out"}, {"n": 5, "jp": "泥棒は高価な宝石類を全部盗んでいきました。", "en": "The thief has made ____ all the expensive jewelry.", "ans": "away with"}, {"n": 6, "jp": "このブドウ園のブドウから、世界で最高のワインがつくられます。", "en": "The grapes in this vineyard are made ____ the best wine in the world.", "ans": "into"}, {"n": 7, "jp": "電車が遅れていたので、会議に間に合いませんでした。", "en": "The train was running late and I couldn't make ____ in time for the meeting.", "ans": "it"}, {"n": 8, "jp": "愛さえあればこのうえなく幸せな結婚生活ができると思いますか？", "en": "Do you think love alone makes ____ an absolutely happy marriage?", "ans": "for"}, {"n": 9, "jp": "ケントはパーティーで愚かなことをして、恥ずかしい思いをしました。", "en": "Kent made ____ himself at the party.", "ans": "a fool out of"}, {"n": 10, "jp": "ジョンは毎日、私に変な顔をするのよ。", "en": "John makes ____ at me every day.", "ans": "a face"}]}, {"page": 16, "title": "make 2", "choices": ["a note of", "a play", "contact with", "do", "ends meet", "friends with", "good use of", "it up", "out to be", "up his mind to"], "questions": [{"n": 1, "jp": "あなたからいただいたこの贈り物を、必ずや大いに活用させていただきます。", "en": "I am sure I can make ____ this gift you gave me.", "ans": "good use of"}, {"n": 2, "jp": "この経済状況の中で収支を合わせるために、精いっぱい働かなければなりません。", "en": "In this economy, we have to work hard to make ____.", "ans": "ends meet"}, {"n": 3, "jp": "あなたはこの問題を、実際よりも深刻なものに見せてしまったじゃないの。", "en": "You made this case ____ more serious than it really is.", "ans": "out to be"}, {"n": 4, "jp": "きょうやるべきことを書き留めておかなければ。", "en": "I need to make ____ what I have to do today.", "ans": "a note of"}, {"n": 5, "jp": "ごめんなさい、この埋め合わせは必ずしますから。", "en": "Sorry, I will do what I can to make ____ to you.", "ans": "it up"}, {"n": 6, "jp": "私は職場のみんなと友達になりたいのです。", "en": "I want to make ____ all the people I work with.", "ans": "friends with"}, {"n": 7, "jp": "ティムは次の便の飛行機に乗って出発する決心をしました。", "en": "Tim made ____ take the next flight out.", "ans": "up his mind to"}, {"n": 8, "jp": "トムは、この町を出ていって以来、一度も私に連絡をしてきません。", "en": "Tom hasn't made ____ me since he left town.", "ans": "contact with"}, {"n": 9, "jp": "新しいパソコンが届くまで、この古いパソコンで間に合わせるしかありません。", "en": "We'll have to make ____ with the old computer until the new one arrives.", "ans": "do"}, {"n": 10, "jp": "彼が私のことを好きなのはわかっていたけれど、こんなに接近してくるとは思ってもみなかったわ。", "en": "I know he likes me, but I never thought he would make ____.", "ans": "a play"}]}, {"page": 17, "title": "pass 1", "choices": ["(a)round", "away [on]", "by", "down", "for", "over", "the buck", "the time", "through", "up"], "questions": [{"n": 1, "jp": "父は1年前のきょう、他界しました。", "en": "My father passed ____ one year ago today.", "ans": "away [on]"}, {"n": 2, "jp": "彼は私とすれ違ったのに、どうして私に気づかなかったのかしら。", "en": "He passed me ____ but I wonder why he didn't recognize me.", "ans": "by"}, {"n": 3, "jp": "私の友人は30歳ですが、18歳でも通用します。", "en": "My friend is 30 years old but she could pass ____ 18.", "ans": "for"}, {"n": 4, "jp": "部のスタッフ全員に、この書類を配ってください。", "en": "Please pass these papers ____ to all the department staff.", "ans": "(a)round"}, {"n": 5, "jp": "きょうは会議が中止になったので、私たちはおしゃべりをして時間をつぶしただけでした。", "en": "The meeting was canceled today so we just passed ____ chatting with each other.", "ans": "the time"}, {"n": 6, "jp": "その探検家はいくつもの山を越えて、ついに海にたどりつきました。", "en": "The explorer passed ____ many mountains and finally reached the sea.", "ans": "over"}, {"n": 7, "jp": "N社からの申し出を断るのは、もったいないように思われます。", "en": "The offer from N company seems too good to pass ____.", "ans": "up"}, {"n": 8, "jp": "次回、君の町を通るときには、君の家に寄るよ。", "en": "The next time I pass ____ your town, I'll drop by.", "ans": "through"}, {"n": 9, "jp": "彼らは、最も立場が下の人に責任を押しつけました。", "en": "They passed ____ to the lowest person on the totem pole.", "ans": "the buck"}, {"n": 10, "jp": "この絵は代々受け継がれてきました。", "en": "This painting was passed ____ from generation to generation.", "ans": "down"}]}, {"page": 18, "title": "pass 2", "choices": ["as", "forward", "from", "into", "judgement on", "off", "out", "sentence on", "the hat (a)round [(a)round the hat]", "under"], "questions": [{"n": 1, "jp": "慈善音楽会の最中に帽子を回して、寄付を集めようよ。", "en": "Let's pass ____ during the charity concert.", "ans": "the hat (a)round [(a)round the hat]"}, {"n": 2, "jp": "ゴンドラはゆっくりと橋の下を通りました。", "en": "The gondola slowly passed ____ the bridge.", "ans": "under"}, {"n": 3, "jp": "あなた自身が完璧でないのなら、人を評価すべきではありません。", "en": "Don't pass ____ others if you're not perfect yourself.", "ans": "judgement on"}, {"n": 4, "jp": "彼女の悲しみが、早く彼女の記憶から消えていくことを願います。", "en": "I hope her sorrow will pass ____ her memory soon.", "ans": "from"}, {"n": 5, "jp": "そんなものをつかませようとしたって無駄だよ。偽物だとわかっているんだ。", "en": "Don't think you can pass that thing ____ on me. I know it's fake.", "ans": "off"}, {"n": 6, "jp": "裁判官は、熟慮のうえで彼に判決を下しました。", "en": "The judge after careful consideration passed ____ him.", "ans": "sentence on"}, {"n": 7, "jp": "この本を前のほうに順に渡して、いちばん前の列に座っている人にあげてください。", "en": "Pass this book ____ and give it to the person sitting in the front.", "ans": "forward"}, {"n": 8, "jp": "長年故郷を離れていると、古い友達をみんな忘れてしまいます。", "en": "After years away from home all your old friends pass ____ oblivion.", "ans": "into"}, {"n": 9, "jp": "その探偵は、一般の通行人を装っています。", "en": "The detective tries to pass ____ a regular passerby.", "ans": "as"}, {"n": 10, "jp": "そのすばらしいニュースを聞いたとき、彼女は気を失いました。", "en": "When she heard the great news, she passed ____.", "ans": "out"}]}, {"page": 19, "title": "pick 1", "choices": ["apart", "at", "from", "off", "on", "out", "over", "up", "up on", "up speed"], "questions": [{"n": 1, "jp": "イヌは、素早くにおいをかぎ分けられます。", "en": "The dogs can pick ____ the scent very quickly.", "ans": "up"}, {"n": 2, "jp": "私たちの車は、下り坂になるとスピードが上がりました。", "en": "Our car picked ____ when it went down the hill.", "ans": "up speed"}, {"n": 3, "jp": "バーゲンセール会場に着いたときには、めぼしい商品は残っていませんでした。", "en": "By the time we got to the sale, the merchandise was picked ____.", "ans": "over"}, {"n": 4, "jp": "きちんと仕事はしているのだから、私を責めるのはやめてください。", "en": "I'm doing my job so stop picking ____ me.", "ans": "on"}, {"n": 5, "jp": "彼女の踊りを実際に見る前に、その出来を酷評しないことです。", "en": "Don't pick ____ her performance before you've actually seen her dance.", "ans": "apart"}, {"n": 6, "jp": "監督は、グループメンバー全員の中からジョーを抜擢しました。", "en": "The director picked Joe ____ all the other members of the group.", "ans": "from"}, {"n": 7, "jp": "熟したブドウだけを摘んで、あとはそのままにしておいてください。", "en": "Pick ____ only the ripe grapes and leave the rest.", "ans": "off"}, {"n": 8, "jp": "彼女はシイタケが嫌いなので、スープを飲む前にシイタケを全部取り出しました。", "en": "Disliking mushrooms, she picked ____ all the mushrooms before eating the soup.", "ans": "out"}, {"n": 9, "jp": "細かいところばかりつつくのはやめて、全体像を見てください。", "en": "Stop picking ____ the trivial things and look at the big picture.", "ans": "at"}, {"n": 10, "jp": "その新入社員はわが社の制度をすぐ覚えました。", "en": "The new guy picked ____ our system right away.", "ans": "up on"}]}, {"page": 20, "title": "pick 2", "choices": ["a fight with", "and choose from", "at", "away", "holes", "through", "up after", "up the pace", "up the tab", "your brain"], "questions": [{"n": 1, "jp": "勘定は僕が払うよ、この前は君が払ったから。", "en": "I'll pick ____ since you paid last time.", "ans": "up the tab"}, {"n": 2, "jp": "この新しい予算なら、さまざまな選択肢から選ぶことができます。", "en": "With the new budget that we have, we can pick ____ a variety of choices.", "ans": "and choose from"}, {"n": 3, "jp": "新プロジェクトのアイディアについて、君の知恵を貸してほしいんだ。", "en": "Let me pick ____ for some new project ideas.", "ans": "your brain"}, {"n": 4, "jp": "おなかがすいていなかったので、食べ物を少し食べただけでした。", "en": "I wasn't hungry so I just picked ____ the food.", "ans": "at"}, {"n": 5, "jp": "フィリップは骨から肉をはぎ取って、イヌにやりました。", "en": "Philip picked the meat ____ from the bone and gave it to the dog.", "ans": "away"}, {"n": 6, "jp": "私は、男がごみの中から再利用できるペットボトルをあさっているのを見ました。", "en": "I saw a man picking ____ the garbage for recyclable plastic bottles.", "ans": "through"}, {"n": 7, "jp": "お母さんはいつも、子どもたちが散らかしたあとを片づけなければなりません。", "en": "The mother has to pick ____ the kids all the time.", "ans": "up after"}, {"n": 8, "jp": "日常生活のペースを上げなければなりませんね。", "en": "You need to pick ____ of your daily activities.", "ans": "up the pace"}, {"n": 9, "jp": "誰にでもけんかを売りたがる人もいます。", "en": "Some people would try to pick ____ anybody.", "ans": "a fight with"}, {"n": 10, "jp": "私の言葉にいちいち言いがかりをつけるのはやめてください。", "en": "Will you please stop picking ____ in what I say?", "ans": "holes"}]}, {"page": 21, "title": "pull 1", "choices": ["away", "down", "in", "into", "off", "out all the stops [all the stops out]", "over", "strings", "the rug from under", "through"], "questions": [{"n": 1, "jp": "検問所で係官に車を止められました。", "en": "The officer ordered me to pull ____ at the security checkpoint.", "ans": "over"}, {"n": 2, "jp": "私は契約の成立を期待していたのに、彼が台なしにしてしまいました。", "en": "I had my heart set on the deal and he pulled ____.", "ans": "the rug from under"}, {"n": 3, "jp": "若干渋滞していましたが、バスは時間どおりに駅に着きました。", "en": "Although there was some traffic, the bus pulled ____ the station on time.", "ans": "into"}, {"n": 4, "jp": "あなたのイヌを、商品から遠ざけていただけますか？", "en": "Would you please pull your dog ____ from the merchandise?", "ans": "away"}, {"n": 5, "jp": "先日の優勝セールは、大勢の客を呼び寄せました。", "en": "The recent victory sale pulled ____ a lot of customers.", "ans": "in"}, {"n": 6, "jp": "このプロジェクトを動かすために、少々コネを使わざるをえませんでした。", "en": "I had to pull a few ____ to get this project going.", "ans": "strings"}, {"n": 7, "jp": "心配しないで。娘さんは強いから、病気を乗り越えますよ。", "en": "Don't worry, your daughter is strong, she'll pull ____.", "ans": "through"}, {"n": 8, "jp": "トニーは、どうやってあんな難しい仕事をやってのけたんだろう？", "en": "How did Tony pull ____ such a difficult task?", "ans": "off"}, {"n": 9, "jp": "彼は、かなりいい額の月給を得ています。", "en": "He pulls ____ a pretty good monthly salary.", "ans": "down"}, {"n": 10, "jp": "今度のイベントでは、全力を尽くします。", "en": "In the upcoming event, we're going to pull ____.", "ans": "out all the stops [all the stops out]"}]}, {"page": 22, "title": "pull 2", "choices": ["a muscle", "ahead", "aside", "at", "for", "my leg", "one over on [a trick on]", "together", "up a chair", "up stakes"], "questions": [{"n": 1, "jp": "準備運動をせずにジョギングを始めたので、筋を痛めてしまいました。", "en": "I started jogging without warming up and I pulled ____.", "ans": "a muscle"}, {"n": 2, "jp": "サポーター全員が、日本のチームを応援していました。", "en": "All the supporters were pulling ____ the Japanese team.", "ans": "for"}, {"n": 3, "jp": "落ち着きなさい。君のスピーチはみんなをあっと驚かせるよ。", "en": "Pull yourself ____. Your speech will make a splash.", "ans": "together"}, {"n": 4, "jp": "いすに座って田中さんをお待ちください、と言われました。", "en": "I was asked to pull ____ and wait for Mr. Tanaka.", "ans": "up a chair"}, {"n": 5, "jp": "私がやらなくてはならない仕事があまりにも多くて、イライラしています。", "en": "There are so many demands pulling ____ me that it's making me irritable.", "ans": "at"}, {"n": 6, "jp": "からかっているのね。そんなこと、信じないよ。", "en": "You're pulling ____. I don't believe it.", "ans": "my leg"}, {"n": 7, "jp": "そのランナーは集団の前に出て、ゴールに向かってラストスパートをかけるでしょう。", "en": "The runner will pull ____ of the crowd and sprint to the finishing line.", "ans": "ahead"}, {"n": 8, "jp": "ここの暮らしは長すぎたから、そろそろ引っ越しましょう。", "en": "We've lived here too long, it's time to pull ____.", "ans": "up stakes"}, {"n": 9, "jp": "上司は私を脇へ連れ出して、内々に話してくれました。", "en": "The chief pulled me ____ for a private talk.", "ans": "aside"}, {"n": 10, "jp": "彼女には気をつけなさい。あなたをすぐにだますから。", "en": "You've got to watch her. She'll pull ____ you right away.", "ans": "one over on [a trick on]"}]}, {"page": 23, "title": "push 1", "choices": ["ahead [forward, on] with", "(a)round [about]", "aside", "away from", "back", "down on", "into", "past", "to", "too far"], "questions": [{"n": 1, "jp": "いつも私にあれこれ指示するのはやめてください。", "en": "I wish you would stop pushing me ____ all the time.", "ans": "(a)round [about]"}, {"n": 2, "jp": "もっと時間が必要だったので、締め切りを1週間延ばしました。", "en": "We needed more time, so we pushed ____ the deadline a week.", "ans": "back"}, {"n": 3, "jp": "このプロジェクトを進めましょう。これはすぐ終えなければならないから。", "en": "Let's push ____ this project. We must finish it soon.", "ans": "ahead [forward, on] with"}, {"n": 4, "jp": "あれ以来彼が私に話しかけてこないところを見ると、私は彼をこき使いすぎたようです。", "en": "I think I pushed him ____ because he hasn't spoken to me ever since.", "ans": "too far"}, {"n": 5, "jp": "ドアが開いているよ。きちんと閉めて。", "en": "You left the door open. Please push it ____.", "ans": "to"}, {"n": 6, "jp": "ルームサービスが必要なときは、あのボタンを押してください。", "en": "Push ____ that button if you want room service.", "ans": "down on"}, {"n": 7, "jp": "資源が限られているからこそ、新技術で限界を超えるしかないのです。", "en": "Because resources are scarce, we must push ____ the limits with new technology.", "ans": "past"}, {"n": 8, "jp": "彼女はビルを押しのけて、彼よりも先に入りました。", "en": "She pushed Bill ____ and went in ahead of him.", "ans": "aside"}, {"n": 9, "jp": "私が後悔するようなことを、無理に押しつけないでください。", "en": "Please don't push me ____ doing something I'll regret.", "ans": "into"}, {"n": 10, "jp": "警察が、パパラッチをその有名人から引き離しました。", "en": "The police pushed the paparazzi ____ the celebrity.", "ans": "away from"}]}, {"page": 24, "title": "push 2", "choices": ["against", "for time", "forward", "luck", "over", "the envelope", "the panic button", "through", "to the wall", "up daisies"], "questions": [{"n": 1, "jp": "誤って（ドアの外にいる）トムに向かってドアを開け、彼にけがをさせてしまいました。", "en": "Accidentally, I pushed the door ____ Tom and hurt him.", "ans": "against"}, {"n": 2, "jp": "郵便配達員は手紙を届けようと、雪を踏み分けていきました。", "en": "The postman pushed ____ the snow, trying to deliver the mail.", "ans": "through"}, {"n": 3, "jp": "この仕事は大変だ。終える前に死にそうだよ。", "en": "This work is so hard I'll be pushing ____ before I can finish it.", "ans": "up daisies"}, {"n": 4, "jp": "今は時間がないので、お話しできません。", "en": "I'm pushed ____ right now so I can't talk.", "ans": "for time"}, {"n": 5, "jp": "予算がきついので、拡張計画をごり押しすることは不可能でした。", "en": "Because of the tight budget, we couldn't push ____ for an expansion.", "ans": "the envelope"}, {"n": 6, "jp": "慌てることはないよ。とにかく落ち着きなさい。", "en": "Don't push ____. Just relax.", "ans": "the panic button"}, {"n": 7, "jp": "私は瀬戸際に立たされていたので、断れませんでした。", "en": "They pushed me ____ and I couldn't say no.", "ans": "to the wall"}, {"n": 8, "jp": "私がいちばん背が低かったので、よく見えるようにと友達が私を前に押し出してくれました。", "en": "Since I was the shortest, my friends pushed me ____ so I could see better.", "ans": "forward"}, {"n": 9, "jp": "あなたがぶつかってきたとき、私は倒れそうになりました。", "en": "When you ran into me, you nearly pushed me ____.", "ans": "over"}, {"n": 10, "jp": "欲張って調子に乗ると、残業することになるかもしれないよ。", "en": "If you push your ____, you might get stuck doing overtime.", "ans": "luck"}]}, {"page": 25, "title": "put 1", "choices": ["across", "away", "down", "in his place", "my finger on it", "on hold", "on weight", "out", "through", "your mind to"], "questions": [{"n": 1, "jp": "経理につないでいただけますか？", "en": "Could you put me ____ to Accounting?", "ans": "through"}, {"n": 2, "jp": "彼女にその件を説明しようと頑張ったけれど、彼女は聞く耳をもちませんでした。", "en": "I tried to put the point ____ to her but she wouldn't listen.", "ans": "across"}, {"n": 3, "jp": "新しい計画は保留にしなければなりません。", "en": "We have to put the new plan ____.", "ans": "on hold"}, {"n": 4, "jp": "何かがおかしかったのですが、その何かがわかりませんでした。", "en": "Something was wrong but I couldn't put ____.", "ans": "my finger on it"}, {"n": 5, "jp": "警察が来て、その暴動を鎮圧する事態になりました。", "en": "The police had to come and put ____ the riot.", "ans": "down"}, {"n": 6, "jp": "フレッドはちょっと太ったよね、そう思わない？", "en": "I think Fred has put ____ a little, don't you agree?", "ans": "on weight"}, {"n": 7, "jp": "我々はみんな、山田さんの高慢さをたしなめました。", "en": "All of us put Mr. Yamada ____.", "ans": "in his place"}, {"n": 8, "jp": "真剣に取り組めば、何でも達成できます。", "en": "If you put ____ it, anything is achievable.", "ans": "your mind to"}, {"n": 9, "jp": "会議が長くて、本当にイライラしました。", "en": "The long meeting really put me ____.", "ans": "out"}, {"n": 10, "jp": "それを拾って片づけてください。", "en": "Pick it up and put it ____, please.", "ans": "away"}]}, {"page": 26, "title": "put 2", "choices": ["away", "behind", "down", "forth", "in for", "out", "pressure on", "the brakes on", "to good use", "up"], "questions": [{"n": 1, "jp": "次の会議のことでプレッシャーをかけないでくれよ。", "en": "Don't put ____ me about the upcoming conference.", "ans": "pressure on"}, {"n": 2, "jp": "君のためにあれだけ努力したのに、お返しはこれだけ？", "en": "I put myself ____ for you and this is what I get?", "ans": "out"}, {"n": 3, "jp": "彼は有罪を宣告され、20年の懲役刑に処されました。", "en": "They put him ____ for 20 years after he was found guilty.", "ans": "away"}, {"n": 4, "jp": "その問題の原因は管理能力のなさだと、我々は考えました。", "en": "We put the problem ____ as unskilled management.", "ans": "down"}, {"n": 5, "jp": "それは昔のことです。もう忘れましたよ。", "en": "That was long ago, and I put that ____ me.", "ans": "behind"}, {"n": 6, "jp": "新しいポジションに願書を出したよ。受かるといいな。", "en": "I put ____ the new position. I hope I get it.", "ans": "in for"}, {"n": 7, "jp": "あの契約を取るには、我々は最善の努力をしなくてはなりません。", "en": "We must put ____ our best effort if we want to land that contract.", "ans": "forth"}, {"n": 8, "jp": "新しい技師は、自分の技術を存分に生かしました。", "en": "The new engineer put his skills ____.", "ans": "to good use"}, {"n": 9, "jp": "予算不足のため、わが社はあのプロジェクトを休止せざるをえませんでした。", "en": "Our company had to put ____ the project due to lack of funds.", "ans": "the brakes on"}, {"n": 10, "jp": "君の家に1泊させてもらえる？", "en": "Can you put me ____ for a night at your place?", "ans": "up"}]}, {"page": 27, "title": "run 1", "choices": ["against", "around [about]", "away", "behind", "down [out]", "for", "from", "its course", "low", "out of"], "questions": [{"n": 1, "jp": "雨が降り始めたので、みんなは雨宿りできる場所を求めて走りました。", "en": "Everyone ran ____ shelter when the rain started to fall.", "ans": "for"}, {"n": 2, "jp": "私たちの意見が食い違って、話題がなくなってしまいました。", "en": "We didn't see eye to eye so we ran ____ things to say.", "ans": "out of"}, {"n": 3, "jp": "きょうは1日中走り回っていました。", "en": "I've been running ____ all day today.", "ans": "around [about]"}, {"n": 4, "jp": "私の時計のバッテリーが切れかかっています。", "en": "The battery in my watch is running ____.", "ans": "down [out]"}, {"n": 5, "jp": "彼女はあなたをいつまでも愛してくれるなどと、早合点してはだめよ。", "en": "Don't run ____ with the idea that she will love you forever.", "ans": "away"}, {"n": 6, "jp": "予定より遅れています。もっと速く進めましょう。", "en": "We are running ____ in our schedule. Let's pick up speed.", "ans": "behind"}, {"n": 7, "jp": "ニーマンは、ホワイトの対立候補として選挙に出馬しました。", "en": "Neiman ran ____ White in the election.", "ans": "against"}, {"n": 8, "jp": "ジムは、その大きなイヌから逃げて柵を越えました。", "en": "Jim ran ____ the huge dog and jumped over the fence.", "ans": "from"}, {"n": 9, "jp": "選択肢がなかったので、自然に任せました。", "en": "We let nature run ____ because we had no choice.", "ans": "its course"}, {"n": 10, "jp": "コーヒーがなくなりかけています。", "en": "We're running ____ on coffee.", "ans": "low"}]}, {"page": 28, "title": "run 2", "choices": ["(a)round in circles", "between", "by the book", "into [across]", "off", "that by me again", "the show", "through [over]", "up a tab", "with it"], "questions": [{"n": 1, "jp": "誰がここの責任者ですか？ 支配人を出してください。", "en": "Who's running ____ here? I want to see the boss.", "ans": "the show"}, {"n": 2, "jp": "パムは、監督を引き継いだら主導権を発揮するよ。", "en": "Once Pam takes over as director, she'll run ____.", "ans": "with it"}, {"n": 3, "jp": "あなたの議論は堂々巡りしています。要点を言いなさい。", "en": "Your argument is running ____. Get to the point.", "ans": "(a)round in circles"}, {"n": 4, "jp": "本当にこれを全部、払えるのですか？ つけがたまっていますよ。", "en": "Are you sure you can pay for all this? You've run ____.", "ans": "up a tab"}, {"n": 5, "jp": "先日、15年ぶりに、古い友達とばったり会いました。", "en": "The other day I ran ____ my old friend for the first time in 15 years.", "ans": "into [across]"}, {"n": 6, "jp": "もう一度言ってもらえますか？ 書き取りたいのです。", "en": "Run ____. I want to write it down.", "ans": "that by me again"}, {"n": 7, "jp": "あれこれと脇道にそれないで、考えることに集中しなさい。", "en": "Stop running ____ in all directions and focus on your thoughts.", "ans": "off"}, {"n": 8, "jp": "きょうの午後、君のレポートに目を通したよ、ジョン。", "en": "I just ran ____ your report this afternoon, John.", "ans": "through [over]"}, {"n": 9, "jp": "あなたはきょうは1日中、事務所と会議場を行ったり来たりしていますね。", "en": "You've been running ____ the office and the conference hall all day.", "ans": "between"}, {"n": 10, "jp": "彼女は会社を規則どおりに運営するので、彼女の決断を変えるように頼んでも無駄です。", "en": "She runs the office ____ so it's no use asking her to change her decision.", "ans": "by the book"}]}, {"page": 29, "title": "see 1", "choices": ["(a)round", "double", "down to", "eye to eye", "fit", "no objection", "red", "the sights", "through", "to it"], "questions": [{"n": 1, "jp": "前に大きなトラックが走っていて、その先が見えませんでした。", "en": "We couldn't see ____ the big truck in front of us.", "ans": "(a)round"}, {"n": 2, "jp": "二重に見えているのかと思ったよ。君たち双子だったんだ。", "en": "I thought I was seeing ____. I didn't know you were twins.", "ans": "double"}, {"n": 3, "jp": "あなたのアイディアに、反対意見はまったくありません。", "en": "I see ____ to your idea.", "ans": "no objection"}, {"n": 4, "jp": "ウィリアムさんを正面玄関までお連れしてもらえますか？", "en": "Would you please see Mr. Williams ____ the main entrance?", "ans": "down to"}, {"n": 5, "jp": "あなたが何を考えているか、誰もがお見通しだ。隠せないよ。", "en": "Everybody can see ____ you. You can't hide it.", "ans": "through"}, {"n": 6, "jp": "適当だと思ったときに、新しいスタッフを入れます。", "en": "If I see ____, I will hire new staff.", "ans": "fit"}, {"n": 7, "jp": "意見が一致したので、これでプロジェクトを進められます。", "en": "Now that we see ____, we can move on with our project.", "ans": "eye to eye"}, {"n": 8, "jp": "紙を無駄使いしている人を見るたびに、怒りがこみあげてきます。", "en": "Whenever I observe people wasting paper, I see ____.", "ans": "red"}, {"n": 9, "jp": "この町にご家族の皆さんで滞在している間に、名所巡りができるといいですね。", "en": "I hope your family is able to see ____ while you're in town.", "ans": "the sights"}, {"n": 10, "jp": "彼らにきちんとした食事の手配をしてください。", "en": "See ____ that they are properly fed.", "ans": "to it"}]}, {"page": 30, "title": "see 2", "choices": ["about", "against", "ahead", "for myself", "home", "in a new light", "off", "stars", "the writing on the wall", "through"], "questions": [{"n": 1, "jp": "彼がフランスで教育を受けたことを知って、彼に対して新しい見方をするようになりました。", "en": "After discovering that he was educated in France, I see him ____.", "ans": "in a new light"}, {"n": 2, "jp": "自分で調べてみるから、心配しないで。", "en": "I will see ____. Don't worry.", "ans": "for myself"}, {"n": 3, "jp": "不吉な予感がします。かなりまずい状態ですよ。", "en": "I see ____. We're in big trouble.", "ans": "the writing on the wall"}, {"n": 4, "jp": "マッカラン空港に行って、彼らを見送りました。", "en": "We went to McCarran Airport to see them ____.", "ans": "off"}, {"n": 5, "jp": "わかりました。きょうの午後、君の要求を検討してみましょう。", "en": "OK. I will see ____ your request this afternoon.", "ans": "about"}, {"n": 6, "jp": "転んで頭を打ったとき、目から火が出ました。", "en": "I saw ____ when I fell and hit my head.", "ans": "stars"}, {"n": 7, "jp": "もう遅いから、彼女を家まで送ってあげなさい。", "en": "It's late so why don't you see her ____?", "ans": "home"}, {"n": 8, "jp": "前方がよく見えないから、ちょっと車を止めます。", "en": "I can't see ____, so I will have to stop.", "ans": "ahead"}, {"n": 9, "jp": "彼もそこにいたかったのですが、プロジェクトを最後まで見届けることはできませんでした。", "en": "He wanted to be there, but he couldn't see the project ____.", "ans": "through"}, {"n": 10, "jp": "（こちらに向かっている）ヘッドライトが明るすぎて、車の中が見えません。", "en": "I can't see inside the car ____ the bright headlights.", "ans": "against"}]}, {"page": 31, "title": "set 1", "choices": ["apart from", "in", "in his ways", "mind at ease", "off", "out for", "sail for", "teeth on edge", "the record straight", "the stage for"], "questions": [{"n": 1, "jp": "安心してください。新しい規則は、我々の部署には影響を及ぼしません。", "en": "Set your ____. The new rules don't affect our department.", "ans": "mind at ease"}, {"n": 2, "jp": "黒板をひっかくあの音には、いつもぞくっとさせられたものです。", "en": "That scraping of the blackboard sound used to always set my ____.", "ans": "teeth on edge"}, {"n": 3, "jp": "一連の苦情が、顧客サービスについてもう一度長い議論をするきっかけになりました。", "en": "A series of complaints set ____ another long discussion on customer service.", "ans": "the stage for"}, {"n": 4, "jp": "あなたの名前を口にするだけで、彼は怒りがこみあげてくるようです。", "en": "It seems the mention of your name would even set him ____.", "ans": "off"}, {"n": 5, "jp": "彼が自分のやり方に固執しなければ、もっと多くの人が彼の才能を評価するのに。", "en": "If he weren't so set ____, more people would appreciate his skills.", "ans": "in his ways"}, {"n": 6, "jp": "支配人は問題の原因を我々に説明することで、誤解を解きました。", "en": "The manager set ____ by explaining to us the cause of the problem.", "ans": "the record straight"}, {"n": 7, "jp": "私の友達は、来週ヨーロッパ旅行に出かけます。", "en": "My friend will set ____ Europe tour next week.", "ans": "out for"}, {"n": 8, "jp": "私たちは明日、メキシコのカンクンに向けて出帆します。", "en": "We set ____ Cancun, Mexico, tomorrow.", "ans": "sail for"}, {"n": 9, "jp": "砂漠に住んでいても、冬になると雪が降ることもあります。", "en": "Even living in a desert, we can see snow when winter sets ____.", "ans": "in"}, {"n": 10, "jp": "派手なネクタイのおかげで、彼は、その部屋にいるほかのビジネスマンよりも目立っています。", "en": "His flashy tie sets him ____ all the other businessmen in the room.", "ans": "apart from"}]}, {"page": 32, "title": "set 2", "choices": ["against", "back", "down in black and white", "foot in", "heart on [upon]", "hopes, on", "in [into] motion", "out", "up", "up shop"], "questions": [{"n": 1, "jp": "あのレストランの豪華なディナーは、かなり値が張りました。", "en": "The fancy dinner at that restaurant really set us ____.", "ans": "back"}, {"n": 2, "jp": "技術担当の人が、新しいコンピューターが使えるように、私の部屋をセットしてくれました。", "en": "The service person has set ____ my room ready for the new computer.", "ans": "up"}, {"n": 3, "jp": "諸条件をきちんと文章化しておきましょう。", "en": "Let's clearly set the terms and conditions ____.", "ans": "down in black and white"}, {"n": 4, "jp": "通りの真ん中で店開きするのはやめてください。", "en": "You can't set ____ in the middle of the street.", "ans": "up shop"}, {"n": 5, "jp": "発注書を受け取るやいなや、そのプロジェクトは動き始めました。", "en": "As soon as we got the purchase order, the project was set ____.", "ans": "in [into] motion"}, {"n": 6, "jp": "テーブルにサンプルを広げて、誰でも自由に試せるようにしてください。", "en": "Set the samples ____ on the table so people can freely test it.", "ans": "out"}, {"n": 7, "jp": "クリスティーナは、イタリアへ帰ろうと決意していました。", "en": "Christina had set her ____ going back to Italy.", "ans": "heart on [upon]"}, {"n": 8, "jp": "新しい書類棚を、壁を背に設置したら、見苦しい穴がふさがれました。", "en": "I set the new file cabinet ____ the wall which covered the ugly hole.", "ans": "against"}, {"n": 9, "jp": "あまり私に期待をかけすぎないでください。がっかりさせたくないのです。", "en": "Please don't set your ____ so high ____ me. I don't want to let you down.", "ans": "hopes, on"}, {"n": 10, "jp": "あのようなところには、絶対に足を踏み入れません。", "en": "I would never set ____ a place like that.", "ans": "foot in"}]}, {"page": 33, "title": "show 1", "choices": ["(a)round", "good faith", "his teeth", "off", "out", "promise", "signs of", "the ropes", "tricks of the trade", "up"], "questions": [{"n": 1, "jp": "テッドはみんなに、彼の新しいスマートフォンを自慢していました。", "en": "Ted was showing ____ his new smartphone to everyone.", "ans": "off"}, {"n": 2, "jp": "ちょうど歓迎会に間に合ったね。", "en": "You showed ____ just in time for the reception.", "ans": "up"}, {"n": 3, "jp": "彼は弱気な様子を見せるのを嫌うそうです。", "en": "I hear he doesn't like to show ____ weakness.", "ans": "signs of"}, {"n": 4, "jp": "午後に町を案内してあげましょう。", "en": "I will show you ____ the town this afternoon.", "ans": "(a)round"}, {"n": 5, "jp": "毎日会社に遅刻してくるのは、誠意を見せないということです。", "en": "Coming to the office late every day does not show ____.", "ans": "good faith"}, {"n": 6, "jp": "あの新しい研修生はかなり見込みがありそうです。", "en": "The new trainee seems to show a lot of ____.", "ans": "promise"}, {"n": 7, "jp": "その仕事のこつを少し教えたら、6時までに仕上げてもらえますか？", "en": "If I show you a few ____, can you get it done by six?", "ans": "tricks of the trade"}, {"n": 8, "jp": "本田さんが（仕事の）やり方を教えてくれます。", "en": "Mr. Honda will show you ____.", "ans": "the ropes"}, {"n": 9, "jp": "あまりにも騒いだせいで、彼は店長から追い出されました。", "en": "He made such a riot that the owner had to show him ____ of the restaurant.", "ans": "out"}, {"n": 10, "jp": "彼は、その問題について議論を始めたとき、怒りをあらわにしました。", "en": "He showed ____ when he started arguing about the matter.", "ans": "his teeth"}]}, {"page": 34, "title": "show 2", "choices": ["colors", "facility in", "into", "the big picture", "through", "to good advantage", "to your seat", "up", "your hand [cards]", "your stuff"], "questions": [{"n": 1, "jp": "さあ、ベン。いいところを見せてくれ。", "en": "OK, Ben. Show ____.", "ans": "your stuff"}, {"n": 2, "jp": "あなたの席までご案内しましょう。", "en": "May I show you ____?", "ans": "to your seat"}, {"n": 3, "jp": "販売業者は私たちを事務所に案内し、さらなる書類に署名させました。", "en": "The dealer showed us ____ his office and made us sign more papers.", "ans": "into"}, {"n": 4, "jp": "人にいい印象を与えたければ、あなたの手腕を十分示しなさい。", "en": "If you want to impress upon people, show your skills ____.", "ans": "to good advantage"}, {"n": 5, "jp": "スタッフは、いくつもの作業に同時に取り組めるという能力を発揮しました。", "en": "The staff showed ____ taking on multiple tasks at once.", "ans": "facility in"}, {"n": 6, "jp": "彼のウェブページが、いくつかの検索サイトに現れました。", "en": "His webpage showed ____ on several search engines.", "ans": "up"}, {"n": 7, "jp": "そんなにすぐには手の内を見せないほうがいいよ。相手の真意がわかるまで待ちなさい。", "en": "Don't show ____ too soon. Wait till you see what the other person is thinking.", "ans": "your hand [cards]"}, {"n": 8, "jp": "野党は、幹細胞研究の問題に対する彼らの立場をはっきりさせました。", "en": "The opposition party showed its ____ on the stem cell research issue.", "ans": "colors"}, {"n": 9, "jp": "面接を通して、その志望者の個性が現れました。", "en": "The interview allowed for the candidate's personality to show ____.", "ans": "through"}, {"n": 10, "jp": "全体像をあなたに示せば、あなたはもっとよく理解できるでしょう。", "en": "I'll show you ____ and you'll understand better.", "ans": "the big picture"}]}, {"page": 35, "title": "sit 1", "choices": ["at", "back and let", "for", "heavy on", "in for", "in judgement on", "on your hands", "still", "up and took notice", "well with"], "questions": [{"n": 1, "jp": "テーブルについている彼女を私がみかけたとき、彼女はお茶を飲んでいました。", "en": "When I saw her sitting ____ the table, she was sipping her tea.", "ans": "at"}, {"n": 2, "jp": "何もしないで見ている場合じゃないよ。助けなくちゃ！", "en": "You can't sit ____. We've got to help out!", "ans": "on your hands"}, {"n": 3, "jp": "私が辞表を提出したとき、みんなは強い関心を示しました。", "en": "When I submitted my resignation, everyone sat ____.", "ans": "up and took notice"}, {"n": 4, "jp": "あなたがわが社の評判を落とすのを、私は何もせずに見過ごすわけにはいきません。", "en": "I can't just sit ____ you destroy our company's reputation.", "ans": "back and let"}, {"n": 5, "jp": "そのニュースを聞いたら、私はじっとして電話を待っているわけにはいきません。", "en": "After hearing the news, I can't sit ____ and wait for the call.", "ans": "still"}, {"n": 6, "jp": "私には、あなたの企画案を批判する資格はありません。", "en": "I am not qualified to sit ____ your proposal.", "ans": "in judgement on"}, {"n": 7, "jp": "その事故の警察調書は、どうもしっくりきません。", "en": "The police report of the accident doesn't sit ____ me.", "ans": "well with"}, {"n": 8, "jp": "この食べ物は胃にもたれます。私は胃薬が必要になりますよ。", "en": "This food sits ____ my stomach. I'll need some stomach medicine.", "ans": "heavy on"}, {"n": 9, "jp": "私はこの委員会のメンバーではありません。竹田さんの代理で出席しているだけなのです。", "en": "I am not a member of this committee. I'm just sitting ____ Mr. Takeda.", "ans": "in for"}, {"n": 10, "jp": "エディ、司法試験をいつ受けたのですか？", "en": "When did you sit ____ the bar exam, Eddie?", "ans": "for"}]}, {"page": 36, "title": "sit 2", "choices": ["(a)round", "back", "bolt upright [up straight]", "down to", "in on", "on the fence", "out", "through", "tight", "up"], "questions": [{"n": 1, "jp": "彼女はその議論に加わるべきかどうかわからないので、どっちつかずの態度でいます。", "en": "She doesn't know if she should join the argument, so she's sitting ____.", "ans": "on the fence"}, {"n": 2, "jp": "私たちは、この講義が終わるまでずっと座っていなくてはならないのですか？", "en": "Do we have to sit ____ until the end of this lecture?", "ans": "through"}, {"n": 3, "jp": "私たちは、何時間もキャンプファイアを囲んで話し合いました。", "en": "We sat ____ the campfire for hours and talked.", "ans": "(a)round"}, {"n": 4, "jp": "君はぶっ続けでプレーしていたんだ。このゲームは休んで、外の空気でも吸ってきたら。", "en": "You've been playing non-stop. Sit ____ this game and get some fresh air.", "ans": "out"}, {"n": 5, "jp": "私はいすにゆったりと座って、くつろぎました。", "en": "I sat ____ and made myself comfortable.", "ans": "back"}, {"n": 6, "jp": "あなたたちのグループディスカッションを見学してもいいですか？", "en": "Would you mind if I sit ____ your group discussion?", "ans": "in on"}, {"n": 7, "jp": "私は2時間以上、背筋を伸ばして座っていなければなりませんでした。", "en": "I had to sit ____ for more than two hours.", "ans": "bolt upright [up straight]"}, {"n": 8, "jp": "誰もが、盛大なクリスマスディナーの席につくのを楽しみにしていました。", "en": "Everyone looked forward to sitting ____ a big Christmas dinner.", "ans": "down to"}, {"n": 9, "jp": "夫が帰ってくるまで、私と一緒に起きて待っていてくれますか？", "en": "Could you sit ____ with me until my husband comes home?", "ans": "up"}, {"n": 10, "jp": "ちょっとお待ちください。すぐそちらに参ります。", "en": "Sit ____. I'll be right with you.", "ans": "tight"}]}, {"page": 37, "title": "stand 1", "choices": ["a chance", "apart", "around [about]", "by", "clear", "in awe of", "in your way", "on [upon] ceremony", "out", "well with"], "questions": [{"n": 1, "jp": "あなたの提案は、あまりしっくりきません。", "en": "Your proposal doesn't stand ____ me.", "ans": "well with"}, {"n": 2, "jp": "ぼんやり立ってないで。仕事があるんでしょう。", "en": "Don't just stand ____. You've got work to do.", "ans": "around [about]"}, {"n": 3, "jp": "ほかの人たちがみんな白いシャツだから、あなたのピンクのシャツはすごく目立ちます。", "en": "Your pink shirt really stands ____ against all those white ones.", "ans": "out"}, {"n": 4, "jp": "それをしなければならないのなら、私たちはあなたの邪魔はしません。", "en": "If that's what you have to do, we won't stand ____.", "ans": "in your way"}, {"n": 5, "jp": "僕たちが彼らに勝てる見込みはないよ。", "en": "We don't stand ____ of beating those guys.", "ans": "a chance"}, {"n": 6, "jp": "離れて立ってね。2人の間を少し空けて。", "en": "Stand ____. Leave some space between you two.", "ans": "apart"}, {"n": 7, "jp": "安全のために、扉から離れて立ってください。", "en": "For your safety, please stand ____ of the doors.", "ans": "clear"}, {"n": 8, "jp": "どんなことが起きようとも、あなたの力になりますよ。", "en": "I'll stand ____ you no matter what happens.", "ans": "by"}, {"n": 9, "jp": "多くの人たちが、大統領に畏敬の念を抱いています。", "en": "A lot of people stand ____ the president.", "ans": "in awe of"}, {"n": 10, "jp": "形式張らずにいきましょう。きょうは特別な日ですから。", "en": "Let's not stand ____. Today's a special day.", "ans": "on [upon] ceremony"}]}, {"page": 38, "title": "stand 2", "choices": ["behind", "between", "for", "in for", "on [upon]", "over", "tall", "to reason", "up", "up in court"], "questions": [{"n": 1, "jp": "彼女にすっぽかされたのは、これで2度目だよ。", "en": "This is the second time she stood me ____.", "ans": "up"}, {"n": 2, "jp": "「UMCは何の略語ですか？」「University Medical Center（大学医療センター）の略語です」", "en": "\"What does UMC stand ____?\" \"It's University Medical Center.\"", "ans": "for"}, {"n": 3, "jp": "警察は彼らに、黄色い線の後ろに立つようにと言いました。", "en": "The police told them to stand ____ the yellow line.", "ans": "behind"}, {"n": 4, "jp": "あなたの言い分には説得力がありません。法廷で通用する見込みは皆無です。", "en": "Your case is too weak. It'll never stand ____.", "ans": "up in court"}, {"n": 5, "jp": "私たちは皆、生涯を通じて、礼儀を重んじなければなりません。", "en": "All of us must stand ____ our dignity throughout our lives.", "ans": "on [upon]"}, {"n": 6, "jp": "自信をもっていいんですよ、あなたはすばらしい仕事をしたのだから。", "en": "You can stand ____ because you did a fantastic job.", "ans": "tall"}, {"n": 7, "jp": "キムは機械のところに立って、それが正確に作動しているかを確認しました。", "en": "Kim stood ____ the machine, making sure it ran properly.", "ans": "over"}, {"n": 8, "jp": "あなたが人生の目標に向かって歩むのを、邪魔したくはありません。", "en": "I don't want to stand ____ you and your goals in life.", "ans": "between"}, {"n": 9, "jp": "2月がどの月よりも寒くなるのは当然です。", "en": "It stands ____ that it will be colder in February.", "ans": "to reason"}, {"n": 10, "jp": "アマンダが仕事に復帰するまで、代理を務めてもらえますか？", "en": "Will you please stand ____ Amanda until she returns to work?", "ans": "in for"}]}, {"page": 39, "title": "take 1", "choices": ["an oath", "apart", "away", "care of", "charge of", "down", "off for", "over", "turns", "up"], "questions": [{"n": 1, "jp": "裁判では、真実を語ることを宣誓しなければなりません。", "en": "In court, you are obliged to take ____ that you will tell the truth.", "ans": "an oath"}, {"n": 2, "jp": "三村さんは、その会議を担当しました。", "en": "Mr. Mimura took ____ the meeting.", "ans": "charge of"}, {"n": 3, "jp": "デニースは来月、マネジャーの仕事を引き継ぎます。", "en": "Denise will be taking ____ for the manager next month.", "ans": "over"}, {"n": 4, "jp": "食べ終えたお皿を下げてもらえますか？", "en": "Would you take ____ the finished plates, please?", "ans": "away"}, {"n": 5, "jp": "母親に小銭をもらうとすぐに、息子たちはお菓子屋さんに駆けていきました。", "en": "As soon as their mother handed them change, the boys took ____ the candy store.", "ans": "off for"}, {"n": 6, "jp": "ハリケーンが、私の家の屋根をバラバラにしてしまったのです。", "en": "The hurricane has taken ____ the roof of my house.", "ans": "apart"}, {"n": 7, "jp": "この仕事は時間を取りすぎています。", "en": "This job is taking ____ too much time.", "ans": "up"}, {"n": 8, "jp": "交代しながら運転しよう。", "en": "We can take ____ driving.", "ans": "turns"}, {"n": 9, "jp": "教授は私たちに、授業中メモを取ることを勧めています。", "en": "The professor recommends that we take ____ notes in his class.", "ans": "down"}, {"n": 10, "jp": "両親が留守の間、私は妹の面倒を見なければなりません。", "en": "I must take ____ my sister while my parents are out.", "ans": "care of"}]}, {"page": 40, "title": "take 2", "choices": ["advantage of", "after", "(a)round", "down", "heart", "heed", "his breath away", "part in", "pity on", "place"], "questions": [{"n": 1, "jp": "森田さんは、昨日の重役会議に参加されたのですか？", "en": "Did Mr. Morita take ____ the directors' meeting yesterday?", "ans": "part in"}, {"n": 2, "jp": "我々は決勝戦で勝利し、相手チームの鼻を明かしてみせました。", "en": "We took ____ the opposing team by winning the championship.", "ans": "down"}, {"n": 3, "jp": "アリスが部屋に入ってくるのを見たとたん、彼は息をのみました。", "en": "Alice took ____ the moment he saw her enter the room.", "ans": "his breath away"}, {"n": 4, "jp": "この物語は、オランダのある小さな村が舞台です。", "en": "This story takes ____ in a small village in Holland.", "ans": "place"}, {"n": 5, "jp": "私の娘は捨てられた子ネコをかわいそうに思い、家に連れて帰りました。", "en": "My daughter took ____ the abandoned kitten and brought it home.", "ans": "pity on"}, {"n": 6, "jp": "スミスさんを連れて、工場を案内していただけませんか、シーラ？", "en": "Would you kindly take Mr. Smith ____ the factory, Sheila?", "ans": "(a)round"}, {"n": 7, "jp": "この絶好の機会を生かせばいいじゃないか。", "en": "Why not take ____ this great opportunity?", "ans": "advantage of"}, {"n": 8, "jp": "運転中は、信号に注意しなければなりません。", "en": "When driving, you must take ____ of the traffic signals.", "ans": "heed"}, {"n": 9, "jp": "私の頑固な性格は父親譲りです。", "en": "I take ____ my father in stubbornness.", "ans": "after"}, {"n": 10, "jp": "つまずくたびに、彼女は元気を取り戻して、また挑戦しました。", "en": "Each time she faltered, she took ____ and tried again.", "ans": "heart"}]}, {"page": 41, "title": "talk 1", "choices": ["about", "(a)round", "away", "back", "big", "down", "in circles", "of the devil", "out", "through his hat"], "questions": [{"n": 1, "jp": "あなたは遠回しにいろいろしゃべっているだけです。要点を言ってください！", "en": "You are just talking ____ the matter. Get to the point!", "ans": "(a)round"}, {"n": 2, "jp": "あまり興奮なさらないで、穏やかにとことん話し合いましょう。", "en": "Let's not get upset and just talk it ____ calmly.", "ans": "out"}, {"n": 3, "jp": "これは、私からの最終提示価格です。これ以上価格を下げることはできません。", "en": "This is my final offer. Don't try to talk me ____.", "ans": "down"}, {"n": 4, "jp": "彼の言うことは気にしないでください。ほらを吹いているだけです。", "en": "Pay no attention to him. He is just talking ____.", "ans": "through his hat"}, {"n": 5, "jp": "うわさをすればなんとやらだ。ちょうど君のことを話していたんだよ。", "en": "Talk ____. We were just talking about you.", "ans": "of the devil"}, {"n": 6, "jp": "彼は偉そうなことを言うけれど、大概たいしたことはありません。", "en": "He talks ____ but there's usually no substance.", "ans": "big"}, {"n": 7, "jp": "目上の人に口答えしたのは、賢明ではなかったね。", "en": "Talking ____ to your superior was not a smart thing to do.", "ans": "back"}, {"n": 8, "jp": "夕方から夜遅くまで、おしゃべりに夢中になってしまいました。そろそろ失礼します。", "en": "We talked ____ the evening and it's time we excused ourselves.", "ans": "away"}, {"n": 9, "jp": "彼はお礼も言わないで去っていった。礼儀正しいなんて、聞いてあきれるよ！", "en": "He left without even saying thank you. Talk ____ manners!", "ans": "about"}, {"n": 10, "jp": "堂々巡りの議論はやめてください。私は混乱しています。", "en": "Stop talking ____. You're confusing me.", "ans": "in circles"}]}, {"page": 42, "title": "talk 2", "choices": ["a mile a minute", "at", "into", "like a nut", "on [away]", "out", "over", "over [on]", "through", "your way out of"], "questions": [{"n": 1, "jp": "電話で話したとき、彼は元気そうでした。", "en": "When I talked with him ____ the phone, he seemed fine.", "ans": "over [on]"}, {"n": 2, "jp": "話についていけないのは無理もありません。彼女は早口ですから。", "en": "It's no wonder you can't follow the story. She talks ____.", "ans": "a mile a minute"}, {"n": 3, "jp": "うまいこと言って、あのゴタゴタを切り抜けたね。", "en": "You talked ____ that mess.", "ans": "your way out of"}, {"n": 4, "jp": "講演者は休憩せずに、数時間話し続けました。", "en": "The speaker talked ____ for hours without a break.", "ans": "on [away]"}, {"n": 5, "jp": "一方的に話すのではなく、話し合おうよ。", "en": "Why don't you talk to me and not talk ____ me?", "ans": "at"}, {"n": 6, "jp": "彼女は、フィットネスクラブに入会するよう、私を説得しました。", "en": "She talked me ____ joining the fitness club.", "ans": "into"}, {"n": 7, "jp": "私はすっかり話し疲れてしまいました。これ以上何も言うことはありません。", "en": "I'm all talked ____ and have nothing more to say.", "ans": "out"}, {"n": 8, "jp": "この問題を話し合うために、私の家にいらっしゃいませんか？", "en": "Could you come to my house to talk this ____?", "ans": "over"}, {"n": 9, "jp": "この件については、次回の役員会議で徹底的に話し合いましょう。", "en": "We'll talk ____ this issue in the next board meeting.", "ans": "through"}, {"n": 10, "jp": "こんなに支払いがあるというのに、新車を買うだって？ ばかなことを言うんじゃない！", "en": "With all these payments, buy a new car? You're talking ____!", "ans": "like a nut"}]}, {"page": 43, "title": "think 1", "choices": ["ahead", "ahead of her time", "back to [on]", "better of", "for yourself", "highly of", "inside the box", "long and hard", "nothing of", "nothing of it"], "questions": [{"n": 1, "jp": "職場まで1時間歩くのは何とも思っていません。いい運動です。", "en": "I think ____ walking an hour to work. It's good exercise.", "ans": "nothing of"}, {"n": 2, "jp": "ラジウムを発見したとき、キュリー夫人は時代を先取りしていました。", "en": "Madame Curie was thinking ____ when she discovered radium.", "ans": "ahead of her time"}, {"n": 3, "jp": "先のことを考えるようにしないと、私は後れを取ってしまいます。", "en": "I have to learn to think ____, or I'll fall behind.", "ans": "ahead"}, {"n": 4, "jp": "自分の力で考えて、他人に決断を任せないことです。", "en": "Think ____ and don't let others make decisions for you.", "ans": "for yourself"}, {"n": 5, "jp": "今度こそ、彼らがこの企画をいいものだと考え直してくれることを、強く期待します。", "en": "We hope seriously that they will think ____ the plan this time.", "ans": "better of"}, {"n": 6, "jp": "子どものころのことを振り返ってみると、私はとても幸せでした。", "en": "When I think ____ my childhood, I was truly happy.", "ans": "back to [on]"}, {"n": 7, "jp": "長いこと一生懸命に考えたけれど、どうしても彼の名前が思い出せません。", "en": "I thought ____, but I still can't recall his name.", "ans": "long and hard"}, {"n": 8, "jp": "従来の考え方に縛られてばかりいると、いいアイディアは何も思いつかないよ。", "en": "You're not going to come up with any good ideas if you think only ____.", "ans": "inside the box"}, {"n": 9, "jp": "我々のクライアントは、山本さんを非常に高く評価しています。", "en": "Our clients think very ____ Mr. Yamamoto.", "ans": "highly of"}, {"n": 10, "jp": "「助けてくれて本当にありがとう」「いいえ、大したことではありません」", "en": "\"Thank you so much for your help.\" \"Think ____.\"", "ans": "nothing of it"}]}, {"page": 44, "title": "think 2", "choices": ["before", "out", "out loud", "over", "straight", "the world", "to", "twice", "under fire", "up"], "questions": [{"n": 1, "jp": "行動する前に考えて。何が待ち構えているかわからないから。", "en": "Think ____ you act. You don't know what's in store.", "ans": "before"}, {"n": 2, "jp": "ごめん、カメラを持ってくるのを忘れました。", "en": "Sorry, I didn't think ____ bring my camera.", "ans": "to"}, {"n": 3, "jp": "私のことは気にしないでね。声に出して考えているだけだから。", "en": "Don't listen to me. I'm just thinking ____.", "ans": "out loud"}, {"n": 4, "jp": "あなたが立てたそのプランは、とてもよくできています。", "en": "The plan you have made was well thought ____.", "ans": "out"}, {"n": 5, "jp": "アリシア、君はまともな考え方をしていないよ。", "en": "Alicia, you are not thinking ____.", "ans": "straight"}, {"n": 6, "jp": "タラと私はそのパーティーに行きたくないので、今、いい口実を考え出しているところです。", "en": "Not wanting to go to the party, Tara and I are thinking ____ a good excuse.", "ans": "up"}, {"n": 7, "jp": "あなたの依頼の件を、1日よく考えさせていただけますか？", "en": "Let me think ____ your request for a day, will you?", "ans": "over"}, {"n": 8, "jp": "ジムは、自分の模型飛行機に夢中です。", "en": "Jim thinks ____ of his model planes.", "ans": "the world"}, {"n": 9, "jp": "もし私があなたなら、上司に電話する前にもう一度よく考えるね。", "en": "If I were you, I'd think ____ before I call my boss.", "ans": "twice"}, {"n": 10, "jp": "リポーターが辛辣な質問を浴びせていたので、彼は非難の中で考えなければなりませんでした。", "en": "The reporters were attacking him with harsh questions and he had to think ____.", "ans": "under fire"}]}, {"page": 45, "title": "turn 1", "choices": ["a profit", "against", "away from", "back the hands of time", "in", "into", "over in her grave", "to", "to our advantage", "up"], "questions": [{"n": 1, "jp": "この不景気にもかかわらず、わが社は1、2年後には利益を上げる計画です。", "en": "In spite of this recession, our company plans to turn ____ in a year or two.", "ans": "a profit"}, {"n": 2, "jp": "夕べ、私の家のドアに誰が来たと思いますか？", "en": "Can you guess who turned ____ at my door last night?", "ans": "up"}, {"n": 3, "jp": "新入社員の歓迎パーティーは大失敗に終わりました。", "en": "The welcome party for our new employees turned ____ a fiasco.", "ans": "into"}, {"n": 4, "jp": "ケリーは、あなたが支持していることすべてに反対するね。", "en": "Kelly turns ____ everything you stand for, doesn't she?", "ans": "against"}, {"n": 5, "jp": "急激な円高を、我々はうまく利用することができました。", "en": "We were able to turn the sharp yen appreciation ____.", "ans": "to our advantage"}, {"n": 6, "jp": "時間を戻すことができたらなあ。", "en": "If we could only turn ____.", "ans": "back the hands of time"}, {"n": 7, "jp": "その内気な女の子は恥ずかしがって、彼らから遠ざかっていきました。", "en": "The shy girl turned ____ them in embarrassment.", "ans": "away from"}, {"n": 8, "jp": "パットは辞表を提出しました。", "en": "Pat has turned ____ her resignation.", "ans": "in"}, {"n": 9, "jp": "私には、あなた以外に頼れる人はいないのです。", "en": "I have no one but you to turn ____.", "ans": "to"}, {"n": 10, "jp": "あなたの亡くなったお母さんがあなたのその言葉を聞いたら、草葉の陰で嘆かれるでしょう。", "en": "If your late mother heard you say that, she'd turn ____.", "ans": "over in her grave"}]}, {"page": 46, "title": "turn 2", "choices": ["(a)round", "down", "inside out", "my back on", "off", "out", "over a new leaf", "the other cheek", "the tables on", "the tide"], "questions": [{"n": 1, "jp": "最初は皆、我々の計画に反対していましたが、しばらくしてその流れを一変させることができました。", "en": "At first, people were opposed to our plan, but after awhile, we were able to turn ____.", "ans": "the tide"}, {"n": 2, "jp": "私たちは高速道路の銀座出口から出ました。", "en": "We turned ____ the expressway at the Ginza exit.", "ans": "off"}, {"n": 3, "jp": "私が背を向けて5秒もたたないうちに、スーツケースはなくなっていました。", "en": "I turned ____ my suitcase for no more than five seconds and it was gone.", "ans": "my back on"}, {"n": 4, "jp": "彼はしかられたあと、反発せずに去っていきました。", "en": "When he was reprimanded, he turned ____ and walked away.", "ans": "the other cheek"}, {"n": 5, "jp": "新しい仕事で、彼は再出発するつもりです。", "en": "With the new job, he hopes to turn ____.", "ans": "over a new leaf"}, {"n": 6, "jp": "大勢の人が今晩の会合に出席しました。", "en": "Many people turned ____ for the meeting tonight.", "ans": "out"}, {"n": 7, "jp": "彼女は部屋じゅうをひっくり返して、時計を捜しました。", "en": "She turned the room ____ to find her watch.", "ans": "inside out"}, {"n": 8, "jp": "委員会は、我々の要請を却下しました。", "en": "The board turned our request ____.", "ans": "down"}, {"n": 9, "jp": "私は怒ったとき、たまに、形勢を逆転して夫をギャフンと言わせることがあります。", "en": "I sometimes turn ____ my husband when I am mad.", "ans": "the tables on"}, {"n": 10, "jp": "昨年はいい年ではありませんでした。今年こそいい年に転じなくては。", "en": "Last year was a bad year. I have to turn this year ____.", "ans": "(a)round"}]}, {"page": 47, "title": "carry", "choices": ["away", "off [away]", "on", "on", "out", "over", "over", "the secret to the grave", "through", "weight"], "questions": [{"n": 1, "jp": "2人の大統領候補による討論は、投票者に大いに影響を与えました。", "en": "The debate between the two presidential candidates carried a lot of ____ with the voters.", "ans": "weight"}, {"n": 2, "jp": "彼は亡くなるまで、その秘密を誰にも漏らしませんでした。", "en": "He carried ____ and told not a soul.", "ans": "the secret to the grave"}, {"n": 3, "jp": "あなたはいつも、都会で暮らすことの不都合な面について、あれこれ文句を言いますね。", "en": "You're always carrying ____ about the negative aspects of city life.", "ans": "on"}, {"n": 4, "jp": "9+8=17、つまり、十の位に1を繰り上げなくてはなりません。", "en": "9 + 8 = 17 so you have to carry the one ____ to the tens column.", "ans": "over"}, {"n": 5, "jp": "その美しい調べに私はうっとりしました。", "en": "The beautiful music carried me ____.", "ans": "away"}, {"n": 6, "jp": "店で買い物をしている間に、誰かが私の自転車を盗みました。", "en": "Someone carried my bike ____ while I was in the store shopping.", "ans": "off [away]"}, {"n": 7, "jp": "1週間もちこたえるのに必要な食糧はどれくらいですか？", "en": "How much foodstuff do you need to carry you ____ the week?", "ans": "through"}, {"n": 8, "jp": "あなたは、このイベントを毎年続けていくことができると思いますか？", "en": "Do you think you can carry ____ this event every year?", "ans": "on"}, {"n": 9, "jp": "この宿題をやり終える十分な時間がありませんでした。", "en": "There wasn't enough time to carry ____ this assignment to the end.", "ans": "out"}, {"n": 10, "jp": "この議題は次回のミーティングにもち越しましょう。", "en": "We will carry this discussion ____ to the next meeting.", "ans": "over"}]}, {"page": 48, "title": "close", "choices": ["deal [contract]", "down", "in", "off", "on", "out of", "ranks", "up", "with", "your eyes to"], "questions": [{"n": 1, "jp": "係員がそのサルに近づき、網で捕獲しました。", "en": "The staff closed ____ on the monkey and trapped it with a net.", "ans": "in"}, {"n": 2, "jp": "キースは大手薬品会社と、500万ドルの契約を結んだところです。", "en": "Keith just closed a five million dollar ____ with the major pharmaceutical company.", "ans": "deal [contract]"}, {"n": 3, "jp": "きのう、やっと新しい家の契約を結びました。来月入居するつもりです。", "en": "We finally closed ____ our new home yesterday and we're moving in next month.", "ans": "on"}, {"n": 4, "jp": "税関は、輸入申告書に不正記載をしたその業者を、営業停止にしました。", "en": "The customs closed the business ____ for improper filing of importation documents.", "ans": "down"}, {"n": 5, "jp": "兵士たちは隊長の下に結束を固めて、彼を全面的にサポートしました。", "en": "The soldiers closed ____ behind their leader and gave him full support.", "ans": "ranks"}, {"n": 6, "jp": "火事が起きたとき、学校は生徒を敷地内から退去させなくてはなりませんでした。", "en": "The school had to close the students ____ campus when the fire started.", "ans": "out of"}, {"n": 7, "jp": "構造修理のため、橋は通行禁止になっています。", "en": "They are closing ____ the bridge for structural repairs.", "ans": "off"}, {"n": 8, "jp": "ジェーンはきょう、店を午後5時に閉めるつもりです。", "en": "Jane is closing ____ shop at 5 pm today.", "ans": "up"}, {"n": 9, "jp": "そのコンサートは、ヒットソングのメドレーで幕を閉じました。", "en": "The concert closed ____ a medley of hit songs.", "ans": "with"}, {"n": 10, "jp": "あなたは、キャプテンの無責任な行動に目をつぶってはいけません。", "en": "You can't close ____ the captain's irresponsible behavior.", "ans": "your eyes to"}]}, {"page": 49, "title": "cut", "choices": ["a deal", "across [through]", "back [down] on", "corners", "down to", "in ahead of", "losses", "out to be", "some slack [a break]", "to the chase"], "questions": [{"n": 1, "jp": "その企業は社員に、カラー印刷の文書を減らすよう命じました。", "en": "The company ordered the employees to cut ____ color printing documents.", "ans": "back [down] on"}, {"n": 2, "jp": "手抜きをしたために、彼は莫大なリスクを負っていました。", "en": "By cutting ____, he was taking a huge risk.", "ans": "corners"}, {"n": 3, "jp": "その弁護士は、経費の半分を払うということで、その会社と契約しました。", "en": "The lawyer cut ____ with the company agreeing to pay half the cost.", "ans": "a deal"}, {"n": 4, "jp": "郵便局に早く行こうと、私はショッピングモールを通り抜けて、近道をしました。", "en": "I cut ____ the shopping mall to get to the post office faster.", "ans": "across [through]"}, {"n": 5, "jp": "その車は、私の車の前に割り込んできました。", "en": "The car cut ____ me.", "ans": "in ahead of"}, {"n": 6, "jp": "勤務初日だったからね。彼女をもう少し寛大な目で見てあげなさい。", "en": "It was her first day on the job. Cut her ____.", "ans": "some slack [a break]"}, {"n": 7, "jp": "採算の取れない東京の支店を閉めて、損失の拡大を食い止めることを、彼らは決定しました。", "en": "They decided to close down the unprofitable branch in Tokyo and cut their ____.", "ans": "losses"}, {"n": 8, "jp": "私は販売に向いていたとは思えません。農業が好きなのです。", "en": "I don't think I was cut ____ a salesperson. I love farming.", "ans": "out to be"}, {"n": 9, "jp": "私たちはそのショーを90分に短縮して、休憩をなくしました。", "en": "We cut the show ____ 90 minutes and took out the intermission.", "ans": "down to"}, {"n": 10, "jp": "さっさと本題に入ってください。この話し合いは何のためなのですか？", "en": "Cut ____. What's the point of this discussion?", "ans": "to the chase"}]}, {"page": 50, "title": "draw", "choices": ["a blank", "a line between", "apart", "himself up", "interest", "near", "out", "straws [lots]", "to a close", "together"], "questions": [{"n": 1, "jp": "私は彼の名前を思い出そうとしたけれど、さっぱり浮かんできませんでした。", "en": "I tried to remember his name, but I could only draw ____.", "ans": "a blank"}, {"n": 2, "jp": "人とのつきあい方に関して、プライベートとビジネスは区別しなければなりません。", "en": "You must draw ____ your personal and business relationships.", "ans": "a line between"}, {"n": 3, "jp": "この会合を終わらせる時間になりました。", "en": "It's time we drew this meeting ____.", "ans": "to a close"}, {"n": 4, "jp": "年度末が近づいてきたから、春の大掃除をやらなければならないね。", "en": "We're drawing ____ to the year end so we've got to do some spring cleaning.", "ans": "near"}, {"n": 5, "jp": "講演者が意図的に会議を引き延ばしたので、みんな疲れ切って、腹を立てました。", "en": "The speaker intentionally drew ____ the meeting that everybody was exhausted and upset.", "ans": "out"}, {"n": 6, "jp": "私たちは、戦争で引き裂かれた国の避難民を支援するために、すべてのボランティアの力を結集する必要があります。", "en": "We need to draw all the volunteers ____ to help the evacuees of the war-torn countries.", "ans": "together"}, {"n": 7, "jp": "国を分裂させた争点は、何だったのでしょうか？", "en": "What were the issues that drew the nation ____?", "ans": "apart"}, {"n": 8, "jp": "ウォルターは月間最優秀社員として名前を呼ばれたとき、背筋をぴんと伸ばして表彰台へと歩いていきました。", "en": "Walter drew ____ and walked over to the podium as his name was called for Best Employee of the Month.", "ans": "himself up"}, {"n": 9, "jp": "くじ引きにして、ギフト券をもらえる人を決めよう。", "en": "Let's draw ____ and see who gets the gift coupon.", "ans": "straws [lots]"}, {"n": 10, "jp": "ジェイソンの発表は、大半の聴衆の関心を引きつけました。", "en": "Jason's presentation drew ____ from the majority of the audience.", "ans": "interest"}]}, {"page": 51, "title": "eat", "choices": ["and run", "away at", "humble pie", "in", "like a bird", "like a horse", "my hat", "out of", "through [into]", "your heart out"], "questions": [{"n": 1, "jp": "うちで食べましょう。手早く何か作りますから。", "en": "Let's eat ____. I'll whip up something.", "ans": "in"}, {"n": 2, "jp": "ジェシーは、仕事上のその問題に悩まされていました。", "en": "The problem at work was eating ____ Jessie.", "ans": "away at"}, {"n": 3, "jp": "食べてすぐ行くのは嫌だけれど、2時に人と会う約束があるんだ。", "en": "I hate to eat ____ but I've got an appointment at 2.", "ans": "and run"}, {"n": 4, "jp": "昇給してもらえるように君が上司を説得するなんて、絶対にできないよ。", "en": "I'll eat ____ if you can persuade your boss to give you a raise.", "ans": "my hat"}, {"n": 5, "jp": "缶から直接食べるんじゃありません。器にあけなさい！", "en": "Don't eat ____ the can, put it in a bowl!", "ans": "out of"}, {"n": 6, "jp": "少ししか食べないつもりなら、栄養のあるものを必ず食べなさいね。", "en": "If you're going to eat ____, make sure it's nutritious.", "ans": "like a bird"}, {"n": 7, "jp": "彼女はものすごく食べるけれど、全然太りませんね。どうしてでしょうね？", "en": "She eats ____ but gains no weight. How does she do that?", "ans": "like a horse"}, {"n": 8, "jp": "思い知ったか。我々が試合に勝ったぞ！", "en": "Eat ____. We won the game!", "ans": "your heart out"}, {"n": 9, "jp": "洗剤に含まれる酸が、カウンターの表面を腐食しました。", "en": "The acid in the cleaner ate ____ the top layer of the counter.", "ans": "through [into]"}, {"n": 10, "jp": "今に見ていなさい。私は君が間違っていることを証明して、君に屈辱を味わわせるから。", "en": "Just you wait. I'll prove you wrong and make you eat ____.", "ans": "humble pie"}]}, {"page": 52, "title": "hang", "choices": ["(a)round [about] with", "behind", "by a hair [thread]", "in there", "it up", "loose", "on, coattails", "on, every word", "out", "over my head"], "questions": [{"n": 1, "jp": "私はパーティーの後片づけをするために、後に残るつもりです。", "en": "I'm going to hang ____ to clean up after the party.", "ans": "behind"}, {"n": 2, "jp": "仕事が気に入らないのなら、辞職したほうがいいよ。", "en": "If you don't like your job, you might as well hang ____.", "ans": "it up"}, {"n": 3, "jp": "その仕事を終えるためには、適切な人材と一緒にやらなくてはなりません。", "en": "You have to hang ____ the right kind of people to get the job done.", "ans": "(a)round [about] with"}, {"n": 4, "jp": "創造力のない人は、誰かほかの人に便乗して成功するしかありません。", "en": "People who lack creativity, have to hang ____ somebody else's ____.", "ans": "on, coattails"}, {"n": 5, "jp": "暖かい時期には、アウトドア・カフェは時を過ごすのにいい場所です。", "en": "When the weather is warm, an outdoor café is a nice place to hang ____.", "ans": "out"}, {"n": 6, "jp": "頑張って！ 助けが向かっています！", "en": "Hang ____! Help is on the way!", "ans": "in there"}, {"n": 7, "jp": "リラックスして！ そのことで悩むのはやめなさい。", "en": "Hang ____! Don't stress over it.", "ans": "loose"}, {"n": 8, "jp": "大事な商談を台なしにして以来、ジョンは首の皮一枚でかろうじて社員にとどまっていました。", "en": "After blowing the important deal, John's employment status was hanging ____.", "ans": "by a hair [thread]"}, {"n": 9, "jp": "旅行の間中、旅行者たちはガイドの話をひと言も聞き漏らすまいとします。", "en": "The tourists hang ____ the guide's ____ throughout the trip.", "ans": "on, every word"}, {"n": 10, "jp": "私は、金銭的な問題で頭を悩まされるのはごめんです。", "en": "I hate to have financial problems hanging ____.", "ans": "over my head"}]}, {"page": 53, "title": "knock", "choices": ["about [around]", "about [around]", "it off", "off", "off kilter", "on wood", "over", "some sense into", "the habit", "together"], "questions": [{"n": 1, "jp": "私の目標は、今年10キロやせることです。うまくいきますように！", "en": "My goal is to lose 10 kg this year, knock ____!", "ans": "on wood"}, {"n": 2, "jp": "私は、無為に時間を過ごしてからでないと、書くことに完全に集中できません。", "en": "I need to knock ____ before I can fully concentrate on writing.", "ans": "about [around]"}, {"n": 3, "jp": "やめてよ！ うるさいったらありゃしない。", "en": "Knock ____! You're annoying me with that noise.", "ans": "it off"}, {"n": 4, "jp": "シェリーはしばらくの間休暇を取って、アジアのあちこちをバックパック1つで旅して回りました。", "en": "Sherry took some time off to knock ____ Asia with just a backpack.", "ans": "about [around]"}, {"n": 5, "jp": "私のバッグが花瓶を倒して壊してしまったので、弁償しなければなりませんでした。", "en": "My bag knocked ____ a vase and I had to pay for the damage.", "ans": "over"}, {"n": 6, "jp": "あの出来事は、彼に分別を教えたのではないかと思います。", "en": "I think that incident knocked ____ him.", "ans": "some sense into"}, {"n": 7, "jp": "店長は、冬物のコートを50%引きにしました。", "en": "The store manager knocked 50 percent ____ the price of winter coats.", "ans": "off"}, {"n": 8, "jp": "私は2段ベッドを急いで組み立てましたが、それでも、ゆうに3時間かかりました。", "en": "I knocked the bunk beds ____ but it still took a good three hours.", "ans": "together"}, {"n": 9, "jp": "壁の絵は、傾いているように見えます。", "en": "The picture on the wall looks like it's knocked ____.", "ans": "off kilter"}, {"n": 10, "jp": "ひとたび薬物中毒になったら、そこから抜け出すのは容易なことではありません。", "en": "Once you have an addiction, it's hard to knock ____.", "ans": "the habit"}]}, {"page": 54, "title": "lay", "choices": ["cards on the table", "down the law", "emphasis on", "hold of", "off", "off", "over", "the blame on", "to rest", "under"], "questions": [{"n": 1, "jp": "消毒剤と包帯を持ってくるまで、彼の腕を押さえておいて。", "en": "Lay ____ his arm until I get some antiseptics and bandages.", "ans": "hold of"}, {"n": 2, "jp": "彼にあまりに多くの義務を負わせると、そのプレッシャーで彼はつぶれてしまうよ。", "en": "If you lay him ____ too many obligations, he'll crush from the pressure.", "ans": "under"}, {"n": 3, "jp": "彼女の話し方ではなく、人格を重視してください。", "en": "Lay ____ her personal character and not her speech pattern.", "ans": "emphasis on"}, {"n": 4, "jp": "彼らは、彼女のなきがらを夫の隣に埋葬しました。", "en": "They laid her body ____ next to her husband.", "ans": "to rest"}, {"n": 5, "jp": "その大きな音を止めてください。集中できません。", "en": "Lay ____ the loud noise. I can't concentrate.", "ans": "off"}, {"n": 6, "jp": "この深刻な不況のために、多くの企業が社員を解雇しました。", "en": "The deep recession made many companies lay ____ their employees.", "ans": "off"}, {"n": 7, "jp": "僕のせいにしないでくれ。僕は潔白だ。", "en": "Don't lay ____ me. I'm innocent.", "ans": "the blame on"}, {"n": 8, "jp": "会社は、服装規定についてのルールを定めました。", "en": "They laid ____ regarding corporate dress code.", "ans": "down the law"}, {"n": 9, "jp": "すべてをさらけ出して、正直に話し合いましょう。", "en": "Let's lay all our ____ and speak frankly.", "ans": "cards on the table"}, {"n": 10, "jp": "ペルーに飛び立つ前に、マイアミで乗り継ぎのために4時間待たなくてはなりませんでした。", "en": "I had to lay ____ in Miami for four hours before the flight to Peru.", "ans": "over"}]}, {"page": 55, "title": "lie", "choices": ["about [around]", "ahead", "alongside [beside]", "beyond", "down on", "in wait", "out", "to", "with", "within"], "questions": [{"n": 1, "jp": "ひどい道は、この先まだ100マイルくらいは続くでしょう。", "en": "A hundred miles of rough road still lies ____.", "ans": "ahead"}, {"n": 2, "jp": "その自転車は長い間雨にさらされていたので、さび始めました。", "en": "The bicycle was lying ____ in the rain so long it started to rust.", "ans": "out"}, {"n": 3, "jp": "その状況は、委員会の手では解決できないですね。", "en": "The situation lies ____ the power of the committee.", "ans": "beyond"}, {"n": 4, "jp": "どうしてこんなにたくさんのファイルが散らかっているのですか？", "en": "Why are all these files lying ____?", "ans": "about [around]"}, {"n": 5, "jp": "彼はしょっちゅういい加減な仕事をしていたので、クビになりました。", "en": "Lying ____ the job so often got himself fired.", "ans": "down on"}, {"n": 6, "jp": "3頭のトラの赤ちゃんが母親の横で寝ていました。", "en": "The three tiger cubs lay ____ their mother.", "ans": "alongside [beside]"}, {"n": 7, "jp": "境界はこの白線の内側だから、線を越えたらOBだよ。", "en": "The boundaries lie ____ these white lines, so if you go out, you're out of bounds.", "ans": "within"}, {"n": 8, "jp": "その決断を下す責任は、委員長にあります。", "en": "It lies ____ the chairperson to make the decision.", "ans": "with"}, {"n": 9, "jp": "ずっと待ち伏せしていたその肉食動物は、やっと獲物を見つけました。", "en": "The predator which has lain ____ for a long time spotted a prey.", "ans": "in wait"}, {"n": 10, "jp": "スイスはイタリアの北に位置しています。", "en": "Switzerland lies ____ the north of Italy.", "ans": "to"}]}, {"page": 56, "title": "move", "choices": ["down [over]", "for", "forward [ahead] with", "heaven and earth", "in with", "out of", "out of the way", "to tears", "up in the world", "within earshot"], "questions": [{"n": 1, "jp": "ほかの方が座れるように、詰めていただけますか？", "en": "Could you please move ____ to allow another person to sit?", "ans": "down [over]"}, {"n": 2, "jp": "このプロジェクトを進めましょう。もう十分話し合いましたから。", "en": "Let's move ____ this project. We've discussed it long enough.", "ans": "forward [ahead] with"}, {"n": 3, "jp": "自転車をどかしてください。ここは車が通ります。", "en": "Move the bikes ____. Cars pass through here.", "ans": "out of the way"}, {"n": 4, "jp": "被告側弁護人は、被告に対する証拠が不十分だとして訴訟の却下を申請しました。", "en": "The defense lawyer moved ____ dismissal of the case since there wasn't enough evidence against his client.", "ans": "for"}, {"n": 5, "jp": "とうとうサリーはブラッドのところに引っ越してきたけれど、家賃などは割り勘にしました。", "en": "Sally finally moved ____ Brad but they split the bills.", "ans": "in with"}, {"n": 6, "jp": "今回の人事異動で、私は出世できればいいなと思います。", "en": "Hopefully with this personnel reshuffles, I can move ____.", "ans": "up in the world"}, {"n": 7, "jp": "討論を聞きたかったので、私は聞こえるところまで近寄りました。", "en": "I wanted to hear the discussion so I moved ____.", "ans": "within earshot"}, {"n": 8, "jp": "家賃が値上がりしていたので、私たちはこの界隈から引っ越しました。", "en": "We moved ____ this neighborhood because the rent was rising.", "ans": "out of"}, {"n": 9, "jp": "ケヴィンが「アヴェ・マリア」を歌ったとき、聴衆は感涙にむせびました。", "en": "Kevin moved the audience ____ when he sang \"Ave Maria\".", "ans": "to tears"}, {"n": 10, "jp": "私は、何としても会合場所に時間どおりに着かなければなりませんでした。", "en": "I had to move ____ to get to the meeting place on time.", "ans": "heaven and earth"}]}, {"page": 57, "title": "pay", "choices": ["a call on", "an arm and a leg", "as you go", "for", "homage [tribute] to", "in advance", "lip service", "off", "the price", "up"], "questions": [{"n": 1, "jp": "私は、24か月で車のローンを完済するつもりです。", "en": "I'm going to pay my car ____ in 24 months.", "ans": "off"}, {"n": 2, "jp": "その独裁者は、長年の強権支配の報いを受けました。", "en": "The dictator paid ____ his long years of ruling his country with an iron fist.", "ans": "for"}, {"n": 3, "jp": "新しい上司は評判が悪いですね。いつも部下に口先だけのいいことを言うから。", "en": "The new boss is unpopular because he's always paying ____ to his staff.", "ans": "lip service"}, {"n": 4, "jp": "私はおばに、この週末訪ねると約束しました。", "en": "I promised my aunt that I would pay ____ her this weekend.", "ans": "a call on"}, {"n": 5, "jp": "君は浪費家だから、何でもかんでもクレジットカード払いで買うのではなく、現金払いにしたほうがいいよ。", "en": "You're a spendthrift so you should pay ____ instead of buying everything on credit.", "ans": "as you go"}, {"n": 6, "jp": "スピーチの中で、彼は会社の創業者を称えました。", "en": "In his speech, he paid ____ the founder of the company.", "ans": "homage [tribute] to"}, {"n": 7, "jp": "サービスを受けるためには、前払いしておかねばなりません。", "en": "You must pay ____ in order to receive the service.", "ans": "in advance"}, {"n": 8, "jp": "飲みすぎれば、ひどい二日酔いというツケを払わなければならないよ。", "en": "If you drink too much, you pay ____ with a major hangover.", "ans": "the price"}, {"n": 9, "jp": "夕べ私が払っておいた食事代を返して。", "en": "Pay ____ what you owe me for last night's dinner.", "ans": "up"}, {"n": 10, "jp": "キャシーは大金を出してあの家を買いましたが、1年後、その資産価値は下がってしまいました。", "en": "Kathy paid ____ for that house and the value dropped a year later.", "ans": "an arm and a leg"}]}, {"page": 58, "title": "roll", "choices": ["along", "down", "his sleeves up", "in", "in", "in the aisles", "off", "out for", "over in his grave", "prices back"], "questions": [{"n": 1, "jp": "最初は大変だったけど、今はうまくいっています。", "en": "We had a rough start but it's now rolling ____ fine.", "ans": "along"}, {"n": 2, "jp": "大勢の来場者は見込まれていなかったけれど、多くの人が途切れることなくやってきました。", "en": "A big turnout was not expected but people kept rolling ____.", "ans": "in"}, {"n": 3, "jp": "ジェームズは腕まくりをして、その仕事を1日で仕上げました。", "en": "James rolled ____ and got the job done in one day.", "ans": "his sleeves up"}, {"n": 4, "jp": "プレミアに招かれたセレブたちは、盛大に歓迎されました。", "en": "The red carpet was rolled ____ the celebrities invited to the premiere.", "ans": "out for"}, {"n": 5, "jp": "亡くなった社長は、彼の息子が会社に対して行っていたことを知ったら、お墓の中で歯がみすることでしょう。", "en": "The late president will roll ____ if he knew what his son was doing to his company.", "ans": "over in his grave"}, {"n": 6, "jp": "ブラック・フライディには、国中の多くの店が商品を値下げします。", "en": "Black Friday is when many stores across the country roll their ____.", "ans": "prices back"}, {"n": 7, "jp": "クラシックカーだと、まだ窓は手動で開けます。", "en": "With vintage cars you still roll ____ the window manually.", "ans": "down"}, {"n": 8, "jp": "私は寝相が悪いので、夕べは、ベッドから転げ落ちてしまいました。", "en": "I toss and turn in my sleep that I rolled ____ my bed last night.", "ans": "off"}, {"n": 9, "jp": "ビジネスがうまくいっていたので、彼のところにはお金がうなっていました。", "en": "His business was thriving that he was really rolling it ____.", "ans": "in"}, {"n": 10, "jp": "そのコメディアンがあまりにもおもしろかったので、聴衆は笑い転げました。", "en": "The comedian was so funny he had the audience rolling ____.", "ans": "in the aisles"}]}, {"page": 59, "title": "start", "choices": ["back to", "for", "from scratch", "off as", "off on the wrong foot", "off with a bang", "on", "over", "over with a clean slate", "up in"], "questions": [{"n": 1, "jp": "大阪へはいつ出発するのですか？", "en": "When do you start ____ Osaka?", "ans": "for"}, {"n": 2, "jp": "間違えたら、最初からやり直さなくてはなりませんよ！", "en": "If you make a mistake, you'll have to start ____!", "ans": "from scratch"}, {"n": 3, "jp": "スティーヴが10分遅れて部屋に入ってきたので、私たちはその会議を最初からやり直しました。", "en": "Steve walked in 10 minutes late so we started the meeting ____.", "ans": "over"}, {"n": 4, "jp": "私たちのプロジェクトは最初うまくいっていませんでしたが、次第にいろいろなことが整ってきました。", "en": "We started our project ____ but gradually things fell to place.", "ans": "off on the wrong foot"}, {"n": 5, "jp": "私たちはここに十分長い間、滞在しました。さあ、ロサンゼルスに帰りましょう。", "en": "We've been here long enough. Let's start ____ LA.", "ans": "back to"}, {"n": 6, "jp": "私は仕事を辞めて、引っ越しました。それで、新たに出直せたのです。", "en": "I quit my job and moved so I could start ____.", "ans": "over with a clean slate"}, {"n": 7, "jp": "また私を非難するのはやめて！ あなたの話はうんざりよ。", "en": "Don't start ____ me again! I've heard enough from you.", "ans": "on"}, {"n": 8, "jp": "スーパースターになる前に、ジョンはエキストラとして出発しました。", "en": "John started ____ an extra before he became a superstar.", "ans": "off as"}, {"n": 9, "jp": "父は私に、自動車関連の仕事を始めさせてくれました。そのうえ、新しい車をデザインする仕事で、私を手伝ってもくれたのです。", "en": "My father started me ____ the auto business. He also helped me with designing new cars.", "ans": "up in"}, {"n": 10, "jp": "新年が華々しくスタートしました！", "en": "The New Year started ____!", "ans": "off with a bang"}]}, {"page": 60, "title": "write", "choices": ["against", "away", "down", "in", "in plain English", "in round figures [numbers]", "off", "out", "up", "up"], "questions": [{"n": 1, "jp": "執筆に1日中かかりきりになっていることに、気がついていますか？", "en": "Do you realize you spend the whole day writing ____?", "ans": "away"}, {"n": 2, "jp": "ジェームズは次の学級委員長を決める選挙で、自分自身に投票しました。", "en": "James wrote his name ____ on the ballot for the next class president.", "ans": "in"}, {"n": 3, "jp": "所得税から仕事用の服代を控除してもらいたいものです。", "en": "I want to write my work clothes ____ on my income taxes.", "ans": "off"}, {"n": 4, "jp": "私は、地元の新聞に、新しいショッピングモールについての記事を書きました。", "en": "I wrote ____ a report on the new shopping mall for our local paper.", "ans": "up"}, {"n": 5, "jp": "略語はみんな、略さない形で書かなければなりません。C.O.D.ではなく、\"Cash on delivery\"です。", "en": "All abbreviations have to be written ____. \"Cash on delivery\" instead of C.O.D.", "ans": "out"}, {"n": 6, "jp": "これを書き留めておいてください。私からの新規ビジネスの提案です。", "en": "Write this ____. This is my new business proposal.", "ans": "down"}, {"n": 7, "jp": "その新聞は、現政府に対して批判的に報じました。", "en": "The newspaper wrote harshly ____ the current government.", "ans": "against"}, {"n": 8, "jp": "注文書を書き上げたら、コピーを1部、保管しておかなければなりません。", "en": "When you write ____ an order, you must keep a duplicate copy on file.", "ans": "up"}, {"n": 9, "jp": "美辞麗句を用いずに、とにかく単純明快な言葉を書きなさい。", "en": "Don't use flowery words, just write ____.", "ans": "in plain English"}, {"n": 10, "jp": "正確な金額でなくてもかまわないよ。大体の額でいいから書いてくれ。", "en": "I don't need the exact amount. Just write it ____.", "ans": "in round figures [numbers]"}]}];
+
+    // Flatten lookup map: qid -> { setIdx, setTitle, page, n, jp, en, ans, choices }
+    const QUESTION_MAP = {};
+    const ALL_QIDS = [];
+    PHRASAL_SETS.forEach((s, sIdx) => {
+      s.questions.forEach((q) => {
+        const qid = `${s.page}-${q.n}`;
+        QUESTION_MAP[qid] = {
+          qid,
+          setIdx: sIdx,
+          page: s.page,
+          setTitle: s.title,
+          n: q.n,
+          jp: q.jp,
+          en: q.en,
+          ans: q.ans,
+          choices: s.choices
+        };
+        ALL_QIDS.push(qid);
+      });
+    });
+
+    const STORAGE_KEY = 'phrasal_verbs_600_v1';
+    const DEFAULT_STATE = {
+      mastered: {},     // qid -> true
+      wrong: {},        // qid -> count of misses
+      readCounts: {},   // qid -> read-aloud count
+      setScores: {},    // page -> { best: number, last: number, attempts: number }
+      settings: {
+        rate: 1.0,
+        voiceURI: '',
+        gapSec: 3,
+        inputMode: 'choice' // 'choice' | 'type'
+      }
+    };
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return structuredClone(DEFAULT_STATE);
+        const parsed = JSON.parse(raw);
+        return {
+          mastered: parsed.mastered || {},
+          wrong: parsed.wrong || {},
+          readCounts: parsed.readCounts || {},
+          setScores: parsed.setScores || {},
+          settings: { ...DEFAULT_STATE.settings, ...(parsed.settings || {}) }
+        };
+      } catch (e) {
+        return structuredClone(DEFAULT_STATE);
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        // ignore storage quota / sandbox restrictions
+      }
+    }
+
+    let state = loadState();
+    let ui = {
+      view: 'home', // 'home' | 'quiz' | 'summary' | 'review'
+      filter: 'all', // 'all' | 'todo' | 'wrong' | 'done'
+      search: '',
+      // Quiz session
+      quizMode: 'set', // 'set' | 'random'
+      quizSetIdx: 0,
+      quizTitle: '',
+      quizIndex: 0,
+      quizQids: [], // array of 10 qids
+      quizChoicesMap: {}, // qid -> array of 4 choices
+      quizAnswers: {}, // qid -> { chosen, isCorrect }
+      quizAnsweredCurrent: false,
+      // Review / Read-aloud session
+      reviewQueue: [], // array of qids
+      reviewIndex: 0,
+      reviewTitle: '間違えた問題の音読復習',
+      reviewHideJp: false,
+      reviewLoopTarget: 3, // 1 | 3 | 5 | 0 (infinite)
+      reviewLoopCurrent: 0,
+      isAutoPlaying: false,
+      isSpeaking: false,
+      autoTimer: null
+    };
+
+    // Clean answer for TTS or sentence insertion (e.g., "away [on]" -> "away", "(a)round" -> "around")
+    function cleanAnswerForSpeech(ans) {
+      let s = ans.replace(/\s*\[[^\]]*\]/g, '').trim();
+      s = s.replace(/\(([^)]+)\)/g, '$1');
+      return s;
+    }
+
+    function normalizeForCheck(str) {
+      return str.trim().toLowerCase().replace(/\s+/g, ' ');
+    }
+
+    function checkTypedAnswer(userInput, ans) {
+      const u = normalizeForCheck(userInput);
+      if (!u) return false;
+      const variants = new Set();
+      const raw = ans;
+      variants.add(normalizeForCheck(raw));
+      variants.add(normalizeForCheck(cleanAnswerForSpeech(raw)));
+      variants.add(normalizeForCheck(raw.replace(/\s*\[[^\]]*\]/g, '').replace(/\([^)]+\)/g, '')));
+      const bracketMatch = raw.match(/^(.*?)\b(\S+)\s*\[([^\]]+)\](.*)$/);
+      if (bracketMatch) {
+        const [, pre, word, alt, post] = bracketMatch;
+        alt.split(',').forEach(a => {
+          const candidate = (pre + a.trim() + post).replace(/\(([^)]+)\)/g, '$1');
+          variants.add(normalizeForCheck(candidate));
+        });
+      }
+      return variants.has(u);
+    }
+
+    // Build full English sentence (plain text for TTS) and highlighted HTML
+    function formatSentence(en, ans, mode = 'plain') {
+      const clean = cleanAnswerForSpeech(ans);
+      const parts = en.split('____');
+      if (parts.length === 1) return en;
+      if (parts.length === 3 && clean.includes(',')) {
+        const [a1, a2] = clean.split(',').map(x => x.trim());
+        const [r1, r2] = ans.split(',').map(x => x.trim());
+        if (mode === 'html') {
+          return `${escapeHtml(parts[0])}<span class="phrase-highlight">${escapeHtml(r1)}</span>${escapeHtml(parts[1])}<span class="phrase-highlight">${escapeHtml(r2)}</span>${escapeHtml(parts[2])}`;
+        }
+        return `${parts[0]}${a1}${parts[1]}${a2}${parts[2]}`;
+      }
+      if (mode === 'html') {
+        return `${escapeHtml(parts[0])}<span class="phrase-highlight">${escapeHtml(ans)}</span>${escapeHtml(parts.slice(1).join('____'))}`;
+      }
+      return `${parts[0]}${clean}${parts.slice(1).join('')}`;
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.remove('opacity-0');
+      clearTimeout(el._t);
+      el._t = setTimeout(() => el.classList.add('opacity-0'), 2400);
+    }
+
+    // Speech Synthesis Management
+    let availableVoices = [];
+    function loadVoices() {
+      if (!('speechSynthesis' in window)) return;
+      const all = window.speechSynthesis.getVoices();
+      availableVoices = all.filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
+      if (availableVoices.length === 0) availableVoices = all;
+      populateVoiceSelect();
+    }
+
+    function populateVoiceSelect() {
+      const sel = document.getElementById('voice-select');
+      if (!sel) return;
+      sel.innerHTML = '';
+      if (availableVoices.length === 0) {
+        const opt = document.createElement('option');
+        opt.value = '';
+        opt.textContent = 'ブラウザ既定の英語音声';
+        sel.appendChild(opt);
+        return;
+      }
+      const defOpt = document.createElement('option');
+      defOpt.value = '';
+      defOpt.textContent = '自動選択（英語ネイティブ優先）';
+      sel.appendChild(defOpt);
+      availableVoices.forEach(v => {
+        const opt = document.createElement('option');
+        opt.value = v.voiceURI;
+        opt.textContent = `${v.name} (${v.lang})`;
+        if (state.settings.voiceURI === v.voiceURI) opt.selected = true;
+        sel.appendChild(opt);
+      });
+    }
+
+    if ('speechSynthesis' in window) {
+      loadVoices();
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+
+    function stopSpeech() {
+      clearTimeout(ui.autoTimer);
+      ui.autoTimer = null;
+      ui.isAutoPlaying = false;
+      ui.isSpeaking = false;
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function speakText(text, onDone) {
+      if (!('speechSynthesis' in window)) {
+        showToast('このブラウザは音声読み上げに対応していません');
+        if (onDone) onDone();
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-US';
+      utter.rate = state.settings.rate || 1.0;
+      if (state.settings.voiceURI) {
+        const match = availableVoices.find(v => v.voiceURI === state.settings.voiceURI);
+        if (match) utter.voice = match;
+      } else if (availableVoices.length > 0) {
+        const preferred = availableVoices.find(v => /en[-_](US|GB)/i.test(v.lang) && /natural|google|samantha|daniel|alex/i.test(v.name))
+          || availableVoices.find(v => /en[-_]US/i.test(v.lang))
+          || availableVoices[0];
+        if (preferred) utter.voice = preferred;
+      }
+      ui.isSpeaking = true;
+      updateSpeakingIndicators();
+      utter.onend = () => {
+        ui.isSpeaking = false;
+        updateSpeakingIndicators();
+        if (onDone) onDone();
+      };
+      utter.onerror = () => {
+        ui.isSpeaking = false;
+        updateSpeakingIndicators();
+        if (onDone) onDone();
+      };
+      window.speechSynthesis.speak(utter);
+    }
+
+    function updateSpeakingIndicators() {
+      const btn = document.getElementById('btn-speak-main');
+      if (btn) {
+        btn.classList.toggle('speaking-active', ui.isSpeaking);
+      }
+    }
+
+    function getWrongQids() {
+      return ALL_QIDS.filter(qid => (state.wrong[qid] || 0) > 0);
+    }
+
+    function updateHeaderBadges() {
+      const wrongCount = getWrongQids().length;
+      const badge = document.getElementById('nav-wrong-badge');
+      badge.textContent = wrongCount;
+      badge.className = wrongCount > 0
+        ? 'px-1.5 py-0.5 text-[11px] rounded-full bg-rose-100 text-rose-700 font-bold'
+        : 'px-1.5 py-0.5 text-[11px] rounded-full bg-slate-100 text-slate-500 font-bold';
+
+      const navSets = document.getElementById('nav-sets');
+      const navReview = document.getElementById('nav-review');
+      navSets.className = (ui.view === 'home' || ui.view === 'quiz' || ui.view === 'summary')
+        ? 'px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-indigo-50 text-indigo-700 transition'
+        : 'px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-100 transition';
+      navReview.className = (ui.view === 'review')
+        ? 'px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-indigo-50 text-indigo-700 transition flex items-center gap-1.5'
+        : 'px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-100 transition flex items-center gap-1.5';
+    }
+
+    function render() {
+      updateHeaderBadges();
+      const main = document.getElementById('app-main');
+      if (ui.view === 'home') renderHome(main);
+      else if (ui.view === 'quiz') renderQuiz(main);
+      else if (ui.view === 'summary') renderSummary(main);
+      else if (ui.view === 'review') renderReview(main);
+    }
+
+    // ================= HOME VIEW =================
+    function renderHome(container) {
+      const masteredCount = Object.keys(state.mastered).filter(k => state.mastered[k]).length;
+      const wrongQids = getWrongQids();
+      const completedSets = PHRASAL_SETS.filter(s => (state.setScores[s.page]?.best || 0) === 10).length;
+      const pct = Math.round((masteredCount / ALL_QIDS.length) * 100);
+
+      const filteredSets = PHRASAL_SETS.map((s, idx) => ({ s, idx })).filter(({ s }) => {
+        const qids = s.questions.map(q => `${s.page}-${q.n}`);
+        const setWrong = qids.filter(id => (state.wrong[id] || 0) > 0).length;
+        const setDone = (state.setScores[s.page]?.best || 0) === 10;
+        if (ui.filter === 'todo' && state.setScores[s.page]) return false;
+        if (ui.filter === 'wrong' && setWrong === 0) return false;
+        if (ui.filter === 'done' && !setDone) return false;
+        if (ui.search.trim()) {
+          const term = ui.search.trim().toLowerCase();
+          const hitTitle = s.title.toLowerCase().includes(term);
+          const hitQ = s.questions.some(q =>
+            q.en.toLowerCase().includes(term) ||
+            q.jp.toLowerCase().includes(term) ||
+            q.ans.toLowerCase().includes(term)
+          );
+          return hitTitle || hitQ;
+        }
+        return true;
+      });
+
+      container.innerHTML = `
+        <div class="space-y-6">
+          <!-- Hero Stats & Review CTA -->
+          <section class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-5">
+              <div class="space-y-2 flex-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2.5 py-0.5 rounded-full">全600問 / 60セット</span>
+                  <span class="text-xs text-slate-500">10問1セット</span>
+                </div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">やさしい動詞で伝えよう！</h2>
+                <div class="pt-1">
+                  <div class="flex justify-between text-xs font-semibold text-slate-600 mb-1.5">
+                    <span>習得済み: ${masteredCount} / 600問 (${pct}%)</span>
+                    <span>満点セット: ${completedSets} / 60</span>
+                  </div>
+                  <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-indigo-600 rounded-full transition-all duration-300" style="width: ${pct}%"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex flex-col sm:flex-row gap-2.5 shrink-0">
+                <button id="btn-start-random-quiz" class="px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-xs transition flex items-center justify-center gap-2">
+                  <span>🎲 総合学習（ランダム10問）</span>
+                </button>
+                <button id="btn-start-wrong-review" class="px-5 py-3 rounded-xl font-bold text-sm shadow-xs transition flex items-center justify-center gap-2 ${wrongQids.length > 0 ? 'bg-rose-600 hover:bg-rose-700 text-white' : 'bg-slate-100 text-slate-400 cursor-not-allowed'}" ${wrongQids.length === 0 ? 'disabled' : ''}>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                  <span>間違えた問題を音読復習 (${wrongQids.length})</span>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Filter & Search -->
+          <section class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex flex-wrap gap-1.5">
+              ${[
+                ['all', 'すべて (60)'],
+                ['todo', '未挑戦'],
+                ['wrong', `復習あり (${PHRASAL_SETS.filter(s => s.questions.some(q => (state.wrong[`${s.page}-${q.n}`] || 0) > 0)).length})`],
+                ['done', `満点 (${completedSets})`]
+              ].map(([key, label]) => `
+                <button data-filter="${key}" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold transition ${ui.filter === key ? 'bg-slate-900 text-white' : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'}">${label}</button>
+              `).join('')}
+            </div>
+            <div class="relative w-full sm:w-64">
+              <input id="search-input" type="text" value="${escapeHtml(ui.search)}" placeholder="動詞・日本語・表現で検索..." class="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+              <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            </div>
+          </section>
+
+          <!-- Set Grid -->
+          <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+            ${filteredSets.length === 0 ? `
+              <div class="col-span-full bg-white rounded-2xl border border-slate-200 p-10 text-center text-slate-500 text-sm">
+                条件に一致するセットが見つかりませんでした。
+              </div>
+            ` : filteredSets.map(({ s, idx }) => {
+              const qids = s.questions.map(q => `${s.page}-${q.n}`);
+              const setWrong = qids.filter(id => (state.wrong[id] || 0) > 0).length;
+              const scoreInfo = state.setScores[s.page];
+              return `
+                <div class="bg-white rounded-2xl border border-slate-200 p-4 flex flex-col justify-between gap-3 hover:border-indigo-300 hover:shadow-sm transition">
+                  <div>
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                      <span class="text-xs font-bold text-slate-400">SET ${String(s.page).padStart(2, '0')}</span>
+                      <div class="flex items-center gap-1.5">
+                        ${setWrong > 0 ? `<span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[11px] font-bold">復習 ${setWrong}</span>` : ''}
+                        ${scoreInfo ? `<span class="px-2 py-0.5 rounded-full ${scoreInfo.best === 10 ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-50 text-indigo-700'} text-[11px] font-bold">最高 ${scoreInfo.best}/10</span>` : `<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 text-[11px] font-medium">未挑戦</span>`}
+                      </div>
+                    </div>
+                    <h3 class="text-lg font-extrabold text-slate-900 capitalize">${escapeHtml(s.title)}</h3>
+                    <div class="flex gap-1 mt-2.5">
+                      ${qids.map(id => {
+                        const isW = (state.wrong[id] || 0) > 0;
+                        const isM = state.mastered[id];
+                        const cls = isW ? 'bg-rose-400' : isM ? 'bg-emerald-500' : 'bg-slate-200';
+                        return `<span class="h-1.5 flex-1 rounded-full ${cls}"></span>`;
+                      }).join('')}
+                    </div>
+                  </div>
+                  <div class="flex gap-2 pt-1">
+                    <button data-start-quiz="${idx}" class="flex-1 py-2 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition">10問テスト</button>
+                    <button data-start-set-review="${idx}" class="py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition" title="このセットの10問を音読する">音読</button>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </section>
+        </div>
+      `;
+
+      document.getElementById('btn-start-random-quiz')?.addEventListener('click', () => {
+        startRandomQuiz();
+      });
+      document.getElementById('btn-start-wrong-review')?.addEventListener('click', () => {
+        startReview(getWrongQids(), '間違えた問題の音読復習');
+      });
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          ui.filter = btn.dataset.filter;
+          render();
+        });
+      });
+      const searchEl = document.getElementById('search-input');
+      searchEl?.addEventListener('input', (e) => {
+        ui.search = e.target.value;
+        render();
+        const nextInput = document.getElementById('search-input');
+        if (nextInput) {
+          nextInput.focus();
+          nextInput.setSelectionRange(ui.search.length, ui.search.length);
+        }
+      });
+      document.querySelectorAll('[data-start-quiz]').forEach(btn => {
+        btn.addEventListener('click', () => startQuiz(Number(btn.dataset.startQuiz)));
+      });
+      document.querySelectorAll('[data-start-set-review]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const s = PHRASAL_SETS[Number(btn.dataset.startSetReview)];
+          const qids = s.questions.map(q => `${s.page}-${q.n}`);
+          startReview(qids, `${s.title}（全10問音読）`);
+        });
+      });
+    }
+
+    // ================= QUIZ VIEW =================
+    const CONFUSABLE_MAP = {
+      'out': ['off', 'away', 'up', 'in', 'down', 'through', 'over'],
+      'off': ['out', 'away', 'down', 'up', 'on', 'over'],
+      'in': ['into', 'on', 'up', 'out', 'at', 'through'],
+      'into': ['in', 'to', 'onto', 'through', 'for'],
+      'on': ['in', 'at', 'to', 'over', 'up', 'upon'],
+      'up': ['out', 'down', 'on', 'off', 'over', 'away'],
+      'down': ['off', 'back', 'out', 'away', 'up', 'under'],
+      'away': ['off', 'out', 'apart', 'back', 'aside'],
+      'for': ['to', 'with', 'at', 'after', 'by', 'from'],
+      'to': ['for', 'with', 'at', 'into', 'toward'],
+      'with': ['for', 'to', 'by', 'on', 'against'],
+      'from': ['off', 'away', 'out', 'of', 'by'],
+      'through': ['over', 'across', 'into', 'out', 'by'],
+      'over': ['through', 'out', 'on', 'off', 'up', 'around'],
+      'back': ['down', 'off', 'away', 'over', 'behind'],
+      'around': ['about', 'over', 'along', 'out', 'through'],
+      'about': ['around', 'over', 'on', 'for', 'of'],
+      'against': ['with', 'for', 'to', 'behind', 'from'],
+      'aside': ['away', 'off', 'back', 'apart', 'out'],
+      'apart': ['away', 'aside', 'off', 'out'],
+      'by': ['with', 'at', 'through', 'on', 'for'],
+      'at': ['on', 'in', 'to', 'for', 'with'],
+      'after': ['for', 'behind', 'over', 'on'],
+      'ahead': ['forward', 'on', 'up', 'along'],
+      'forward': ['ahead', 'on', 'forth', 'up'],
+      'forth': ['forward', 'out', 'on', 'away'],
+      'along': ['around', 'on', 'with', 'over'],
+      'together': ['up', 'along', 'in', 'around'],
+      'under': ['below', 'down', 'behind', 'off'],
+      'behind': ['back', 'after', 'under', 'away'],
+      'between': ['among', 'through', 'across', 'with'],
+      'beyond': ['over', 'past', 'above', 'through'],
+      'past': ['beyond', 'by', 'over', 'through'],
+      'still': ['tight', 'quiet', 'back', 'down'],
+      'tight': ['still', 'on', 'up', 'back'],
+      'short': ['low', 'out', 'down', 'off']
+    };
+
+    const ALL_UNIQUE_CHOICES = Array.from(new Set(PHRASAL_SETS.flatMap(set => set.choices)));
+
+    function getSameVerbChoices(q) {
+      const baseVerb = q.setTitle.split(' ')[0].toLowerCase();
+      const pool = [];
+      PHRASAL_SETS.forEach(set => {
+        if (set.title.split(' ')[0].toLowerCase() === baseVerb) {
+          pool.push(...set.choices);
+        }
+      });
+      return Array.from(new Set(pool));
+    }
+
+    function pickTrickyChoices(q) {
+      const ansClean = cleanAnswerForSpeech(q.ans).toLowerCase();
+      const ansWords = ansClean.split(/\s+/).filter(Boolean);
+      const ansWordCount = ansWords.length;
+      const ansFirst = ansWords[0] || '';
+      const ansLast = ansWords[ansWords.length - 1] || '';
+      const hasComma = q.ans.includes(',');
+
+      const sameSet = new Set(q.choices);
+      const sameVerb = new Set(getSameVerbChoices(q));
+      const confusableSet = new Set(CONFUSABLE_MAP[ansFirst] || CONFUSABLE_MAP[ansLast] || []);
+
+      // Candidate pool: same verb sets + confusable single/multi words + all unique choices
+      const candidates = new Set([...sameVerb, ...(CONFUSABLE_MAP[ansFirst] || []), ...ALL_UNIQUE_CHOICES]);
+      const scored = [];
+
+      candidates.forEach(cand => {
+        const candClean = cleanAnswerForSpeech(cand).toLowerCase();
+        if (!candClean || candClean === ansClean || normalizeForCheck(cand) === normalizeForCheck(q.ans)) return;
+        const candHasComma = cand.includes(',');
+        if (hasComma !== candHasComma) return;
+
+        const candWords = candClean.split(/\s+/).filter(Boolean);
+        let score = 0;
+
+        // Word count match is crucial so distractors look grammatically plausible
+        if (candWords.length === ansWordCount) score += 50;
+        else if (Math.abs(candWords.length - ansWordCount) === 1) score += 10;
+        else score -= 30;
+
+        // Same verb set = high semantic/collocation trap
+        if (sameSet.has(cand)) score += 35;
+        else if (sameVerb.has(cand)) score += 22;
+
+        // Confusable preposition/particle pair
+        if (confusableSet.has(candClean) || confusableSet.has(candWords[0]) || confusableSet.has(candWords[candWords.length - 1])) {
+          score += 40;
+        }
+
+        // Shared prefix/suffix word (e.g. "up with" vs "up to", "care of" vs "charge of")
+        if (candWords[0] === ansFirst || candWords[candWords.length - 1] === ansLast) {
+          score += 35;
+        }
+        if (ansClean.length >= 3 && candClean.length >= 3 && candClean[0] === ansFirst[0] && candWords.length === ansWordCount) {
+          score += 8;
+        }
+
+        // Small random jitter to vary distractors across sessions
+        score += Math.random() * 6;
+        scored.push({ cand, score });
+      });
+
+      scored.sort((a, b) => b.score - a.score);
+      const distractors = scored.slice(0, 3).map(x => x.cand);
+      return shuffleArray([q.ans, ...distractors]);
+    }
+
+    function buildChoicesMap(qids) {
+      const map = {};
+      qids.forEach(qid => {
+        const q = QUESTION_MAP[qid];
+        if (q) map[qid] = pickTrickyChoices(q);
+      });
+      return map;
+    }
+
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function startQuiz(setIdx) {
+      stopSpeech();
+      const set = PHRASAL_SETS[setIdx];
+      ui.view = 'quiz';
+      ui.quizMode = 'set';
+      ui.quizSetIdx = setIdx;
+      ui.quizTitle = `SET ${set.page}: ${set.title}`;
+      ui.quizIndex = 0;
+      ui.quizQids = set.questions.map(q => `${set.page}-${q.n}`);
+      ui.quizChoicesMap = buildChoicesMap(ui.quizQids);
+      ui.quizAnswers = {};
+      ui.quizAnsweredCurrent = false;
+      render();
+    }
+
+    function startRandomQuiz() {
+      stopSpeech();
+      ui.view = 'quiz';
+      ui.quizMode = 'random';
+      ui.quizSetIdx = 0;
+      ui.quizTitle = '総合学習（全単語ランダム10問）';
+      ui.quizIndex = 0;
+      ui.quizQids = shuffleArray(ALL_QIDS).slice(0, 10);
+      ui.quizChoicesMap = buildChoicesMap(ui.quizQids);
+      ui.quizAnswers = {};
+      ui.quizAnsweredCurrent = false;
+      render();
+    }
+
+    function renderQuiz(container) {
+      const qid = ui.quizQids[ui.quizIndex];
+      const q = QUESTION_MAP[qid];
+      const ansRecord = ui.quizAnswers[qid];
+      const isAnswered = Boolean(ansRecord);
+      const isWrongFlagged = (state.wrong[qid] || 0) > 0;
+      const inputMode = state.settings.inputMode || 'choice';
+
+      let blankHtml = '';
+      if (!isAnswered) {
+        blankHtml = escapeHtml(q.en).replace(/____/g, '<span class="blank-pill">____</span>');
+      } else {
+        const pillClass = ansRecord.isCorrect ? 'blank-pill correct' : 'blank-pill wrong';
+        const parts = q.en.split('____');
+        if (parts.length === 3 && q.ans.includes(',')) {
+          const [r1, r2] = q.ans.split(',').map(x => x.trim());
+          blankHtml = `${escapeHtml(parts[0])}<span class="${pillClass}">${escapeHtml(r1)}</span>${escapeHtml(parts[1])}<span class="${pillClass}">${escapeHtml(r2)}</span>${escapeHtml(parts[2])}`;
+        } else {
+          blankHtml = `${escapeHtml(parts[0])}<span class="${pillClass}">${escapeHtml(q.ans)}</span>${escapeHtml(parts.slice(1).join('____'))}`;
+        }
+      }
+
+      container.innerHTML = `
+        <div class="max-w-3xl mx-auto space-y-5">
+          <!-- Top bar -->
+          <div class="flex items-center justify-between gap-2">
+            <button id="btn-back-home" class="text-xs sm:text-sm font-semibold text-slate-500 hover:text-slate-900 flex items-center gap-1">
+              ← セット一覧に戻る
+            </button>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg capitalize">${escapeHtml(ui.quizTitle)}</span>
+              <span class="text-xs font-bold text-slate-600">${ui.quizIndex + 1} / ${ui.quizQids.length}</span>
+            </div>
+          </div>
+
+          <!-- Progress dots -->
+          <div class="flex gap-1.5">
+            ${ui.quizQids.map((id, i) => {
+              const rec = ui.quizAnswers[id];
+              let cls = 'bg-slate-200';
+              if (rec) cls = rec.isCorrect ? 'bg-emerald-500' : 'bg-rose-500';
+              else if (i === ui.quizIndex) cls = 'bg-indigo-600';
+              return `<div class="h-2 flex-1 rounded-full ${cls} transition-all"></div>`;
+            }).join('')}
+          </div>
+
+          <!-- Question Card -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-7 shadow-xs space-y-5">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs font-bold text-slate-400 capitalize">${ui.quizMode === 'random' ? `SET ${q.page} (${escapeHtml(q.setTitle)}) ・ 問題 ${q.n}` : `問題 ${q.n}`}</span>
+              <div class="flex items-center gap-2">
+                <div class="inline-flex rounded-lg bg-slate-100 p-0.5 text-xs font-semibold">
+                  <button data-mode="choice" class="mode-btn px-2.5 py-1 rounded-md transition ${inputMode === 'choice' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500'}">選択</button>
+                  <button data-mode="type" class="mode-btn px-2.5 py-1 rounded-md transition ${inputMode === 'type' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500'}">入力</button>
+                </div>
+                <button id="btn-toggle-flag" class="px-2.5 py-1 rounded-lg text-xs font-semibold border transition ${isWrongFlagged ? 'bg-rose-50 border-rose-200 text-rose-700' : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-50'}">
+                  ${isWrongFlagged ? '★ 復習リスト入り' : '☆ 復習に追加'}
+                </button>
+              </div>
+            </div>
+
+            <div class="space-y-3">
+              <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed">${escapeHtml(q.jp)}</p>
+              <p class="text-lg sm:text-xl font-medium text-slate-900 leading-relaxed tracking-tight">${blankHtml}</p>
+            </div>
+
+            ${!isAnswered ? (
+              inputMode === 'choice' ? `
+                <div class="pt-2">
+                  <p class="text-xs font-bold text-slate-400 mb-2.5">4択から選んでください</p>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    ${(ui.quizChoicesMap[qid] || pickTrickyChoices(q)).map((ch, idx) => `
+                      <button data-choice="${escapeHtml(ch)}" class="choice-btn text-left px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-300 text-sm sm:text-base font-semibold text-slate-800 transition active:scale-[0.99] flex items-center gap-2.5">
+                        <span class="w-6 h-6 rounded-md bg-white border border-slate-200 text-xs font-bold text-slate-500 flex items-center justify-center shrink-0">${['A', 'B', 'C', 'D'][idx] || idx + 1}</span>
+                        <span>${escapeHtml(ch)}</span>
+                      </button>
+                    `).join('')}
+                  </div>
+                </div>
+              ` : `
+                <form id="type-form" class="pt-2 flex flex-col sm:flex-row gap-2">
+                  <input id="type-input" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="空欄に入る句動詞を入力..." class="flex-1 px-4 py-2.5 rounded-xl border border-slate-300 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                  <button type="submit" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm transition">回答する</button>
+                </form>
+              `
+            ) : `
+              <div class="rounded-xl p-4 ${ansRecord.isCorrect ? 'bg-emerald-50 border border-emerald-200' : 'bg-rose-50 border border-rose-200'} space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm font-extrabold ${ansRecord.isCorrect ? 'text-emerald-700' : 'text-rose-700'}">
+                      ${ansRecord.isCorrect ? '⭕ 正解！' : '❌ 不正解'}
+                    </span>
+                    ${!ansRecord.isCorrect ? `<span class="text-xs text-rose-700">あなたの回答: <strong>${escapeHtml(ansRecord.chosen)}</strong> → 正解: <strong>${escapeHtml(q.ans)}</strong></span>` : ''}
+                  </div>
+                  <button id="btn-speak-main" class="px-3.5 py-1.5 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-800 text-xs font-bold flex items-center gap-1.5 shadow-2xs transition">
+                    <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                    <span>音声を聞く</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex justify-end pt-1">
+                <button id="btn-next-q" class="px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm transition">
+                  ${ui.quizIndex < ui.quizQids.length - 1 ? '次の問題へ →' : '結果を見る →'}
+                </button>
+              </div>
+            `}
+          </div>
+        </div>
+      `;
+
+      document.getElementById('btn-back-home')?.addEventListener('click', () => {
+        stopSpeech();
+        ui.view = 'home';
+        render();
+      });
+
+      document.querySelectorAll('.mode-btn').forEach(b => {
+        b.addEventListener('click', () => {
+          state.settings.inputMode = b.dataset.mode;
+          saveState();
+          render();
+        });
+      });
+
+      document.getElementById('btn-toggle-flag')?.addEventListener('click', () => {
+        if ((state.wrong[qid] || 0) > 0) {
+          delete state.wrong[qid];
+          showToast('復習リストから外しました');
+        } else {
+          state.wrong[qid] = 1;
+          showToast('復習リストに追加しました');
+        }
+        saveState();
+        render();
+      });
+
+      const submitAnswer = (chosen, isCorrect) => {
+        ui.quizAnswers[qid] = { chosen, isCorrect };
+        if (isCorrect) {
+          state.mastered[qid] = true;
+        } else {
+          state.wrong[qid] = (state.wrong[qid] || 0) + 1;
+          delete state.mastered[qid];
+        }
+        saveState();
+        render();
+        speakText(formatSentence(q.en, q.ans, 'plain'));
+      };
+
+      document.querySelectorAll('.choice-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const chosen = btn.dataset.choice;
+          const isCorrect = normalizeForCheck(chosen) === normalizeForCheck(q.ans);
+          submitAnswer(chosen, isCorrect);
+        });
+      });
+
+      const typeForm = document.getElementById('type-form');
+      if (typeForm) {
+        const inp = document.getElementById('type-input');
+        inp?.focus();
+        typeForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const val = inp.value.trim();
+          if (!val) return;
+          const isCorrect = checkTypedAnswer(val, q.ans);
+          submitAnswer(val, isCorrect);
+        });
+      }
+
+      document.getElementById('btn-speak-main')?.addEventListener('click', () => {
+        speakText(formatSentence(q.en, q.ans, 'plain'));
+      });
+
+      document.getElementById('btn-next-q')?.addEventListener('click', () => {
+        stopSpeech();
+        if (ui.quizIndex < ui.quizQids.length - 1) {
+          ui.quizIndex++;
+          render();
+        } else {
+          if (ui.quizMode === 'set') {
+            const set = PHRASAL_SETS[ui.quizSetIdx];
+            const correctCount = Object.values(ui.quizAnswers).filter(a => a.isCorrect).length;
+            const prev = state.setScores[set.page] || { best: 0, last: 0, attempts: 0 };
+            state.setScores[set.page] = {
+              best: Math.max(prev.best, correctCount),
+              last: correctCount,
+              attempts: prev.attempts + 1
+            };
+            saveState();
+          }
+          ui.view = 'summary';
+          render();
+        }
+      });
+    }
+
+    // ================= SUMMARY VIEW =================
+    function renderSummary(container) {
+      const results = ui.quizQids.map(qid => {
+        const q = QUESTION_MAP[qid];
+        return { q, qid, rec: ui.quizAnswers[qid] || { chosen: '-', isCorrect: false } };
+      });
+      const score = results.filter(r => r.rec.isCorrect).length;
+      const missed = results.filter(r => !r.rec.isCorrect);
+
+      container.innerHTML = `
+        <div class="max-w-3xl mx-auto space-y-5">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 text-center space-y-4 shadow-xs">
+            <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full capitalize">${escapeHtml(ui.quizTitle)}</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">${score} / ${results.length} 正解</h2>
+            <p class="text-sm text-slate-600">
+              ${score === results.length ? '全問正解です！この調子で定着させましょう。' : `間違えた ${missed.length} 問が復習リストに追加されました。音声を聞きながら音読して定着させましょう！`}
+            </p>
+            <div class="flex flex-wrap justify-center gap-3 pt-2">
+              ${missed.length > 0 ? `
+                <button id="btn-review-missed" class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-sm transition flex items-center gap-2">
+                  <span>間違えた ${missed.length} 問を音読復習する</span>
+                </button>
+              ` : ''}
+              <button id="btn-review-all-set" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm transition">
+                この10問を音読する
+              </button>
+              <button id="btn-retry-quiz" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-sm transition">
+                ${ui.quizMode === 'random' ? '🎲 新しいランダム10問' : 'もう一度テスト'}
+              </button>
+              <button id="btn-summary-home" class="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 font-bold text-sm transition">
+                一覧へ戻る
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 divide-y divide-slate-100 overflow-hidden">
+            ${results.map(({ q, qid, rec }) => `
+              <div class="p-4 flex items-start justify-between gap-3 ${rec.isCorrect ? '' : 'bg-rose-50/40'}">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold ${rec.isCorrect ? 'text-emerald-600' : 'text-rose-600'}">${rec.isCorrect ? '⭕' : '❌'} ${ui.quizMode === 'random' ? `SET ${q.page} (${escapeHtml(q.setTitle)}) Q${q.n}` : `Q${q.n}`}</span>
+                    <span class="text-xs text-slate-500">${escapeHtml(q.jp)}</span>
+                  </div>
+                  <p class="text-sm sm:text-base text-slate-900">${formatSentence(q.en, q.ans, 'html')}</p>
+                </div>
+                <button data-play-qid="${qid}" class="shrink-0 p-2 rounded-lg bg-slate-100 hover:bg-indigo-100 text-slate-700 hover:text-indigo-700 transition" title="音声再生">
+                  🔊
+                </button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      document.getElementById('btn-review-missed')?.addEventListener('click', () => {
+        startReview(missed.map(m => m.qid), `${ui.quizTitle}（間違い復習）`);
+      });
+      document.getElementById('btn-review-all-set')?.addEventListener('click', () => {
+        startReview(results.map(r => r.qid), `${ui.quizTitle}（全10問音読）`);
+      });
+      document.getElementById('btn-retry-quiz')?.addEventListener('click', () => {
+        if (ui.quizMode === 'random') startRandomQuiz();
+        else startQuiz(ui.quizSetIdx);
+      });
+      document.getElementById('btn-summary-home')?.addEventListener('click', () => {
+        ui.view = 'home';
+        render();
+      });
+      document.querySelectorAll('[data-play-qid]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = QUESTION_MAP[btn.dataset.playQid];
+          if (item) speakText(formatSentence(item.en, item.ans, 'plain'));
+        });
+      });
+    }
+
+    // ================= REVIEW / READ-ALOUD VIEW =================
+    function startReview(qids, title) {
+      stopSpeech();
+      ui.view = 'review';
+      ui.reviewQueue = [...qids];
+      ui.reviewIndex = 0;
+      ui.reviewTitle = title || '間違えた問題の音読復習';
+      ui.reviewLoopCurrent = 0;
+      render();
+    }
+
+    function playReviewLoopStep() {
+      if (!ui.isAutoPlaying || ui.reviewQueue.length === 0) return;
+      const qid = ui.reviewQueue[ui.reviewIndex];
+      const item = QUESTION_MAP[qid];
+      if (!item) return;
+      const text = formatSentence(item.en, item.ans, 'plain');
+      speakText(text, () => {
+        if (!ui.isAutoPlaying) return;
+        ui.reviewLoopCurrent++;
+        state.readCounts[qid] = (state.readCounts[qid] || 0) + 1;
+        saveState();
+        const countEl = document.getElementById('read-count-val');
+        if (countEl) countEl.textContent = state.readCounts[qid];
+
+        const gapMs = (state.settings.gapSec || 3) * 1000;
+        const target = ui.reviewLoopTarget;
+        if (target === 0 || ui.reviewLoopCurrent < target) {
+          ui.autoTimer = setTimeout(playReviewLoopStep, gapMs);
+        } else {
+          if (ui.reviewIndex < ui.reviewQueue.length - 1) {
+            ui.autoTimer = setTimeout(() => {
+              if (!ui.isAutoPlaying) return;
+              ui.reviewIndex++;
+              ui.reviewLoopCurrent = 0;
+              render();
+              playReviewLoopStep();
+            }, gapMs);
+          } else {
+            ui.isAutoPlaying = false;
+            render();
+            showToast('音読ループが1周完了しました！');
+          }
+        }
+      });
+    }
+
+    function renderReview(container) {
+      if (ui.reviewQueue.length === 0) {
+        container.innerHTML = `
+          <div class="max-w-xl mx-auto bg-white rounded-2xl border border-slate-200 p-8 text-center space-y-4 shadow-xs">
+            <div class="w-14 h-14 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl">🎉</div>
+            <h2 class="text-xl font-extrabold text-slate-900">復習リストは空です！</h2>
+            <p class="text-sm text-slate-600">現在、間違えた問題はありません。セット一覧から新しい10問テストに挑戦するか、任意のセットの「音読」ボタンから音読練習ができます。</p>
+            <button id="btn-empty-home" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm transition">セット一覧へ戻る</button>
+          </div>
+        `;
+        document.getElementById('btn-empty-home')?.addEventListener('click', () => {
+          ui.view = 'home';
+          render();
+        });
+        return;
+      }
+
+      if (ui.reviewIndex >= ui.reviewQueue.length) ui.reviewIndex = 0;
+      const qid = ui.reviewQueue[ui.reviewIndex];
+      const item = QUESTION_MAP[qid];
+      const readCount = state.readCounts[qid] || 0;
+      const isWrong = (state.wrong[qid] || 0) > 0;
+      const rate = state.settings.rate || 1.0;
+
+      container.innerHTML = `
+        <div class="max-w-3xl mx-auto space-y-5">
+          <!-- Top Bar -->
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <button id="btn-rev-home" class="text-xs sm:text-sm font-semibold text-slate-500 hover:text-slate-900">← セット一覧に戻る</button>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg">${escapeHtml(ui.reviewTitle)}</span>
+              <span class="text-xs font-bold text-slate-600">${ui.reviewIndex + 1} / ${ui.reviewQueue.length}</span>
+            </div>
+          </div>
+
+          <!-- Main Read-Aloud Card -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="text-xs font-bold text-slate-400 capitalize">SET ${item.page} (${escapeHtml(item.setTitle)}) ・ Q${item.n}</span>
+              <div class="flex items-center gap-2">
+                <button id="btn-toggle-jp" class="px-2.5 py-1 rounded-lg border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50">
+                  ${ui.reviewHideJp ? '和訳を表示' : '和訳を隠す'}
+                </button>
+                <span class="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 text-xs font-bold">
+                  音読回数: <span id="read-count-val">${readCount}</span>回
+                </span>
+              </div>
+            </div>
+
+            <!-- English Sentence -->
+            <div class="py-2 space-y-4">
+              <p class="text-xl sm:text-2xl font-semibold text-slate-900 leading-relaxed">
+                ${formatSentence(item.en, item.ans, 'html')}
+              </p>
+              ${!ui.reviewHideJp ? `
+                <p class="text-sm sm:text-base text-slate-600 leading-relaxed border-l-4 border-indigo-200 pl-3">
+                  ${escapeHtml(item.jp)}
+                </p>
+              ` : ''}
+            </div>
+
+            <!-- Audio & Shadowing Controls -->
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-4">
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-2">
+                  <button id="btn-speak-main" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm flex items-center gap-2 transition ${ui.isSpeaking ? 'speaking-active' : ''}">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                    <span>1回聞く</span>
+                  </button>
+
+                  <button id="btn-auto-loop" class="px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 transition ${ui.isAutoPlaying ? 'bg-rose-600 hover:bg-rose-700 text-white' : 'bg-white border border-slate-300 hover:bg-slate-100 text-slate-800'}">
+                    <span>${ui.isAutoPlaying ? '⏹ 停止' : '🔁 連続音読スタート'}</span>
+                  </button>
+                </div>
+
+                <!-- Speed Pills -->
+                <div class="flex items-center gap-1 bg-white border border-slate-200 rounded-lg p-1">
+                  ${[0.7, 0.85, 1.0, 1.2].map(r => `
+                    <button data-rate="${r}" class="rate-btn px-2 py-1 rounded text-xs font-bold transition ${rate === r ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:bg-slate-100'}">${r}x</button>
+                  `).join('')}
+                </div>
+              </div>
+
+              <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600 pt-1 border-t border-slate-200/80">
+                <div class="flex items-center gap-1.5">
+                  <span class="font-semibold">各問リピート:</span>
+                  ${[[1, '1回'], [3, '3回'], [5, '5回'], [0, '無限']].map(([cnt, lbl]) => `
+                    <button data-loop="${cnt}" class="loop-btn px-2 py-0.5 rounded font-semibold ${ui.reviewLoopTarget === cnt ? 'bg-slate-800 text-white' : 'bg-white border border-slate-200 text-slate-600'}">${lbl}</button>
+                  `).join('')}
+                </div>
+                <span>ポーズ間隔: <strong>${state.settings.gapSec}秒</strong>（音声後に声に出して音読！）</span>
+              </div>
+            </div>
+
+            <!-- Read-aloud Counter & Mastered Action -->
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+              <button id="btn-add-read" class="px-4 py-2.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-sm transition">
+                🗣️ 音読した (+1)
+              </button>
+
+              <div class="flex items-center gap-2">
+                ${isWrong ? `
+                  <button id="btn-mark-mastered" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm transition">
+                    ✓ 覚えた（復習から外す）
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+
+          <!-- Prev / Next Navigation -->
+          <div class="flex items-center justify-between gap-3">
+            <button id="btn-rev-prev" class="px-4 py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-sm transition ${ui.reviewIndex === 0 ? 'opacity-40 cursor-not-allowed' : ''}" ${ui.reviewIndex === 0 ? 'disabled' : ''}>
+              ← 前の問題
+            </button>
+            <button id="btn-rev-next" class="px-4 py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-sm transition ${ui.reviewIndex >= ui.reviewQueue.length - 1 ? 'opacity-40 cursor-not-allowed' : ''}" ${ui.reviewIndex >= ui.reviewQueue.length - 1 ? 'disabled' : ''}>
+              次の問題 →
+            </button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('btn-rev-home')?.addEventListener('click', () => {
+        stopSpeech();
+        ui.view = 'home';
+        render();
+      });
+
+      document.getElementById('btn-toggle-jp')?.addEventListener('click', () => {
+        ui.reviewHideJp = !ui.reviewHideJp;
+        render();
+      });
+
+      document.getElementById('btn-speak-main')?.addEventListener('click', () => {
+        stopSpeech();
+        speakText(formatSentence(item.en, item.ans, 'plain'));
+      });
+
+      document.getElementById('btn-auto-loop')?.addEventListener('click', () => {
+        if (ui.isAutoPlaying) {
+          stopSpeech();
+          render();
+        } else {
+          stopSpeech();
+          ui.isAutoPlaying = true;
+          ui.reviewLoopCurrent = 0;
+          render();
+          playReviewLoopStep();
+        }
+      });
+
+      document.querySelectorAll('.rate-btn').forEach(b => {
+        b.addEventListener('click', () => {
+          state.settings.rate = Number(b.dataset.rate);
+          saveState();
+          render();
+        });
+      });
+
+      document.querySelectorAll('.loop-btn').forEach(b => {
+        b.addEventListener('click', () => {
+          ui.reviewLoopTarget = Number(b.dataset.loop);
+          render();
+        });
+      });
+
+      document.getElementById('btn-add-read')?.addEventListener('click', () => {
+        state.readCounts[qid] = (state.readCounts[qid] || 0) + 1;
+        saveState();
+        const el = document.getElementById('read-count-val');
+        if (el) el.textContent = state.readCounts[qid];
+      });
+
+      document.getElementById('btn-mark-mastered')?.addEventListener('click', () => {
+        stopSpeech();
+        delete state.wrong[qid];
+        state.mastered[qid] = true;
+        saveState();
+        ui.reviewQueue = ui.reviewQueue.filter(id => id !== qid);
+        if (ui.reviewIndex >= ui.reviewQueue.length) ui.reviewIndex = Math.max(0, ui.reviewQueue.length - 1);
+        showToast('復習リストから外しました！');
+        render();
+      });
+
+      document.getElementById('btn-rev-prev')?.addEventListener('click', () => {
+        if (ui.reviewIndex > 0) {
+          stopSpeech();
+          ui.reviewIndex--;
+          ui.reviewLoopCurrent = 0;
+          render();
+        }
+      });
+
+      document.getElementById('btn-rev-next')?.addEventListener('click', () => {
+        if (ui.reviewIndex < ui.reviewQueue.length - 1) {
+          stopSpeech();
+          ui.reviewIndex++;
+          ui.reviewLoopCurrent = 0;
+          render();
+        }
+      });
+    }
+
+    // ================= HEADER & SETTINGS MODAL =================
+    document.getElementById('btn-home').addEventListener('click', () => {
+      stopSpeech();
+      ui.view = 'home';
+      render();
+    });
+    document.getElementById('nav-sets').addEventListener('click', () => {
+      stopSpeech();
+      ui.view = 'home';
+      render();
+    });
+    document.getElementById('nav-review').addEventListener('click', () => {
+      startReview(getWrongQids(), '間違えた問題の音読復習');
+    });
+
+    const modal = document.getElementById('settings-modal');
+    function openSettings() {
+      populateVoiceSelect();
+      const speedBox = document.getElementById('speed-options');
+      speedBox.innerHTML = [0.7, 0.85, 1.0, 1.2].map(r => `
+        <button data-set-rate="${r}" class="py-2 rounded-lg text-xs font-bold border transition ${state.settings.rate === r ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-slate-700 border-slate-200'}">${r}x</button>
+      `).join('');
+      speedBox.querySelectorAll('button').forEach(b => {
+        b.addEventListener('click', () => {
+          state.settings.rate = Number(b.dataset.setRate);
+          saveState();
+          openSettings();
+        });
+      });
+
+      const gapBox = document.getElementById('gap-options');
+      gapBox.innerHTML = [2, 3, 5].map(g => `
+        <button data-set-gap="${g}" class="py-2 rounded-lg text-xs font-bold border transition ${state.settings.gapSec === g ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-slate-700 border-slate-200'}">${g}秒</button>
+      `).join('');
+      gapBox.querySelectorAll('button').forEach(b => {
+        b.addEventListener('click', () => {
+          state.settings.gapSec = Number(b.dataset.setGap);
+          saveState();
+          openSettings();
+        });
+      });
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    document.getElementById('btn-settings').addEventListener('click', openSettings);
+    document.getElementById('close-settings').addEventListener('click', () => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      render();
+    });
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        render();
+      }
+    });
+    document.getElementById('voice-select').addEventListener('change', (e) => {
+      state.settings.voiceURI = e.target.value;
+      saveState();
+    });
+
+    document.getElementById('btn-export').addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'phrasal-verbs-600-backup.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('バックアップを書き出しました');
+    });
+
+    document.getElementById('input-import').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(reader.result);
+          if (parsed && typeof parsed === 'object') {
+            state = {
+              mastered: parsed.mastered || {},
+              wrong: parsed.wrong || {},
+              readCounts: parsed.readCounts || {},
+              setScores: parsed.setScores || {},
+              settings: { ...DEFAULT_STATE.settings, ...(parsed.settings || {}) }
+            };
+            saveState();
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            render();
+            showToast('バックアップを読み込みました');
+          }
+        } catch (err) {
+          showToast('JSONの読み込みに失敗しました');
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    document.getElementById('btn-reset-confirm').addEventListener('click', () => {
+      document.getElementById('reset-confirm-box').classList.remove('hidden');
+    });
+    document.getElementById('btn-reset-cancel').addEventListener('click', () => {
+      document.getElementById('reset-confirm-box').classList.add('hidden');
+    });
+    document.getElementById('btn-reset-exec').addEventListener('click', () => {
+      state = structuredClone(DEFAULT_STATE);
+      saveState();
+      document.getElementById('reset-confirm-box').classList.add('hidden');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      ui.view = 'home';
+      render();
+      showToast('学習記録をリセットしました');
+    });
+
+    // Initial render
+    render();
+  </script>
+</body>
+</html>
